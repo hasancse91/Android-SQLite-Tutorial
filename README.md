@@ -1,0 +1,3 @@
+# Android-SQLite-Tutorial
+
+THIS REPO IS NOT DONE YET. COMMING SOON...
