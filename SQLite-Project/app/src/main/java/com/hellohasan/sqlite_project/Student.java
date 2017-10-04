@@ -13,6 +13,11 @@ public class Student {
         this.email = email;
     }
 
+    public Student(String name, long registrationNumber) {
+        this.name = name;
+        this.registrationNumber = registrationNumber;
+    }
+
     public String getName() {
         return name;
     }
