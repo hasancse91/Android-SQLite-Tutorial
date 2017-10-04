@@ -1,4 +1,4 @@
-package com.hellohasan.sqlite_project.CreateStudent;
+package com.hellohasan.sqlite_project.StudentCrud.CreateStudent;
 
 import com.hellohasan.sqlite_project.Student;
 

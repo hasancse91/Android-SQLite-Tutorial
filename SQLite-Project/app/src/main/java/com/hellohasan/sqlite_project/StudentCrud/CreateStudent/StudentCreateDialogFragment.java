@@ -1,4 +1,4 @@
-package com.hellohasan.sqlite_project.CreateStudent;
+package com.hellohasan.sqlite_project.StudentCrud.CreateStudent;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -8,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.hellohasan.sqlite_project.Config;
+import com.hellohasan.sqlite_project.Database.DatabaseQueryClass;
 import com.hellohasan.sqlite_project.R;
 import com.hellohasan.sqlite_project.Student;
 
@@ -59,7 +62,7 @@ public class StudentCreateDialogFragment extends DialogFragment {
         createButton = view.findViewById(R.id.createButton);
         cancelButton = view.findViewById(R.id.cancelButton);
 
-        String title = getArguments().getString("title");
+        String title = getArguments().getString(Config.TITLE);
         getDialog().setTitle(title);
 
         createButton.setOnClickListener(new View.OnClickListener() {
@@ -71,8 +74,16 @@ public class StudentCreateDialogFragment extends DialogFragment {
                 emailString = emailEditText.getText().toString();
 
                 Student student = new Student(nameString, registrationNumber, phoneString, emailString);
-                studentCreateListener.onStudentCreated(student);
-                getDialog().dismiss();
+
+                DatabaseQueryClass databaseQueryClass = new DatabaseQueryClass(getContext());
+
+                long id = databaseQueryClass.insertStudent(student);
+
+                if(id>0){
+                    studentCreateListener.onStudentCreated(student);
+                    getDialog().dismiss();
+                } else
+                    Toast.makeText(getContext(), "Cannot create student!", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -17,42 +17,42 @@ import java.util.List;
 
 public class DatabaseQueryClass {
 
-    private SQLiteDatabase sqLiteDatabase;
-    private DatabaseHandler databaseHandler;
     private Context context;
 
     public DatabaseQueryClass(Context context){
-        databaseHandler = new DatabaseHandler(context);
         this.context = context;
         Logger.addLogAdapter(new AndroidLogAdapter());
     }
 
 
-    public void insertStudent(String name, long registrationNum, String phone, String email){
+    public long insertStudent(Student student){
 
-        sqLiteDatabase = databaseHandler.getWritableDatabase();
+        long id = -1;
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(Config.COLUMN_STUDENT_NAME, name);
-        contentValues.put(Config.COLUMN_STUDENT_REGISTRATION, registrationNum);
-        contentValues.put(Config.COLUMN_STUDENT_PHONE, phone);
-        contentValues.put(Config.COLUMN_STUDENT_EMAIL, email);
+        contentValues.put(Config.COLUMN_STUDENT_NAME, student.getName());
+        contentValues.put(Config.COLUMN_STUDENT_REGISTRATION, student.getRegistrationNumber());
+        contentValues.put(Config.COLUMN_STUDENT_PHONE, student.getPhoneNumber());
+        contentValues.put(Config.COLUMN_STUDENT_EMAIL, student.getEmail());
 
         try {
-            sqLiteDatabase.insert(Config.TABLE_STUDENT, null, contentValues);
+            id = sqLiteDatabase.insert(Config.TABLE_STUDENT, null, contentValues);
         } catch (Exception e){
             Logger.d("Exception: " + e.getMessage());
-            Toast.makeText(context, "Operation failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Operation failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         } finally {
             sqLiteDatabase.close();
         }
 
-
-
+        return id;
     }
 
     public List<Student> getAllStudent(){
-        sqLiteDatabase = databaseHandler.getReadableDatabase();
+
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 
         String SELECT_QUERY = String.format("SELECT %s, %s FROM %s", Config.COLUMN_STUDENT_NAME, Config.COLUMN_REGISTRATION_NUMBER, Config.TABLE_STUDENT);
         Cursor cursor = null;
@@ -82,7 +82,9 @@ public class DatabaseQueryClass {
     }
 
     public Student getStudentByRegNum(long registrationNum){
-        sqLiteDatabase = databaseHandler.getReadableDatabase();
+
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 
         String SELECT_QUERY = String.format("SELECT * FROM %s WHERE %s = %s", Config.TABLE_STUDENT, Config.COLUMN_STUDENT_REGISTRATION, String.valueOf(registrationNum));
         Cursor cursor = null;
@@ -111,7 +113,8 @@ public class DatabaseQueryClass {
     }
 
     public void deleteStudentByRegNum(long registrationNum) {
-        sqLiteDatabase = databaseHandler.getWritableDatabase();
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 
         sqLiteDatabase.delete(Config.TABLE_STUDENT, Config.COLUMN_STUDENT_REGISTRATION + " = ? ", new String[]{ String.valueOf(registrationNum)});
         sqLiteDatabase.close();
@@ -120,7 +123,8 @@ public class DatabaseQueryClass {
     }
 
     private void deleteAllSubjectsByRegNum(long registrationNum) {
-        sqLiteDatabase = databaseHandler.getWritableDatabase();
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 
         String DELETE_QUERY = "DELETE FROM " + Config.TABLE_SUBJECT + " WHERE " + Config.COLUMN_REGISTRATION_NUMBER + " = " + registrationNum;
         sqLiteDatabase.execSQL(DELETE_QUERY);
@@ -128,7 +132,8 @@ public class DatabaseQueryClass {
     }
 
     public void insertSubject(String name, long registrationNum, String phone, String email){
-        sqLiteDatabase = databaseHandler.getWritableDatabase();
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(Config.COLUMN_STUDENT_NAME, name);

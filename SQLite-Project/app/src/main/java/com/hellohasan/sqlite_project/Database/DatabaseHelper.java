@@ -8,18 +8,27 @@ import com.hellohasan.sqlite_project.Config;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
-public class DatabaseHandler extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper {
+
+    private static DatabaseHelper databaseHelper;
 
     // All Static variables
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
-    private static final String DATABASE_NAME = "student-db";
+    private static final String DATABASE_NAME = Config.DATABASE_NAME;
 
     // Constructor
-    public DatabaseHandler(Context context) {
+    private DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         Logger.addLogAdapter(new AndroidLogAdapter());
+    }
+
+    public static synchronized DatabaseHelper getInstance(Context context){
+        if(databaseHelper==null){
+            databaseHelper = new DatabaseHelper(context);
+        }
+        return databaseHelper;
     }
 
     @Override
@@ -31,7 +40,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + Config.COLUMN_STUDENT_NAME + " TEXT NOT NULL, "
                 + Config.COLUMN_STUDENT_REGISTRATION + " INTEGER NOT NULL UNIQUE, "
                 + Config.COLUMN_STUDENT_PHONE + " TEXT, " //nullable
-                + Config.COLUMN_STUDENT_EMAIL + " TEXT, " //nullable
+                + Config.COLUMN_STUDENT_EMAIL + " TEXT " //nullable
                 + ")";
 
         String CREATE_SUBJECT_TABLE = "CREATE TABLE " + Config.TABLE_SUBJECT + "("

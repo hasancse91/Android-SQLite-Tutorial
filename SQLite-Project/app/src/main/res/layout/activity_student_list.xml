@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hellohasan.sqlite_project.MainActivity">
+    tools:context="com.hellohasan.sqlite_project.StudentCrud.StudentListActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
