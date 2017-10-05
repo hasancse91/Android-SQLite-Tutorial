@@ -1,4 +1,4 @@
-package com.hellohasan.sqlite_project.StudentCrud.CreateStudent;
+package com.hellohasan.sqlite_project.StudentCrud.CreateAndListShow;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.hellohasan.sqlite_project.Config;
 import com.hellohasan.sqlite_project.Database.DatabaseQueryClass;
 import com.hellohasan.sqlite_project.R;
-import com.hellohasan.sqlite_project.Student;
+import com.hellohasan.sqlite_project.StudentCrud.Student;
 
 
 public class StudentCreateDialogFragment extends DialogFragment {

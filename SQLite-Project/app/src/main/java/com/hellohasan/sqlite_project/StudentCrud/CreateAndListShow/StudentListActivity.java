@@ -1,4 +1,4 @@
-package com.hellohasan.sqlite_project.StudentCrud;
+package com.hellohasan.sqlite_project.StudentCrud.CreateAndListShow;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -7,10 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.hellohasan.sqlite_project.Config;
-import com.hellohasan.sqlite_project.StudentCrud.CreateStudent.StudentCreateDialogFragment;
-import com.hellohasan.sqlite_project.StudentCrud.CreateStudent.StudentCreateListener;
 import com.hellohasan.sqlite_project.R;
-import com.hellohasan.sqlite_project.Student;
+import com.hellohasan.sqlite_project.StudentCrud.Student;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 

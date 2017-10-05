@@ -1,4 +1,4 @@
-package com.hellohasan.sqlite_project;
+package com.hellohasan.sqlite_project.StudentCrud;
 
 public class Student {
     private String name;

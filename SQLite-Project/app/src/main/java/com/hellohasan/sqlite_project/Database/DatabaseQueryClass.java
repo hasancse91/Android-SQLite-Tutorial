@@ -7,13 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
 import com.hellohasan.sqlite_project.Config;
-import com.hellohasan.sqlite_project.Student;
+import com.hellohasan.sqlite_project.StudentCrud.Student;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class DatabaseQueryClass {
 
