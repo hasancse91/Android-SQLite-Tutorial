@@ -69,4 +69,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+
+        //enable foreign key constraints like ON UPDATE CASCADE, ON DELETE CASCADE
+        db.execSQL("PRAGMA foreign_keys = ON;");
+    }
 }

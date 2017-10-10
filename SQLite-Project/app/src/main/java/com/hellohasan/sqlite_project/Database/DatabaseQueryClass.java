@@ -12,6 +12,7 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DatabaseQueryClass {
@@ -77,7 +78,7 @@ public class DatabaseQueryClass {
             sqLiteDatabase.close();
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     public Student getStudentByRegNum(long registrationNum){

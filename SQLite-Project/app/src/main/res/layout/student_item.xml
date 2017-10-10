@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="8dp">
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginRight="8dp"
+    android:padding="8dp"
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/nameTextView"
@@ -23,7 +29,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:src="@drawable/ic_close_black_24dp"
-        android:alpha="0.5"/>
+        android:alpha="0.5"
+        android:contentDescription="@string/cross_image_content_description" />
 
     <TextView
         android:id="@+id/registrationNumTitle"
@@ -31,7 +38,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/nameTextView"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:text="Registration No: "
+        android:text="@string/registration_no"
         android:textStyle="bold"/>
 
     <TextView
@@ -40,7 +47,9 @@
         android:layout_height="wrap_content"
         tools:text="100145"
         app:layout_constraintTop_toBottomOf="@id/nameTextView"
-        app:layout_constraintLeft_toRightOf="@id/registrationNumTitle"/>
+        app:layout_constraintLeft_toRightOf="@id/registrationNumTitle"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"/>
 
     <TextView
         android:id="@+id/emailTitle"
@@ -48,7 +57,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/registrationNumTitle"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:text="Email: "
+        android:text="@string/email"
         android:textStyle="bold"/>
 
     <TextView
@@ -57,7 +66,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/registrationNumTitle"
         app:layout_constraintLeft_toRightOf="@id/emailTitle"
-        tools:text="john@gmail.com"/>
+        tools:text="john@gmail.com"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"/>
 
     <TextView
         android:id="@+id/phoneTitle"
@@ -65,7 +76,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/emailTitle"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:text="Phone: "
+        android:text="@string/phone"
         android:textStyle="bold"/>
 
     <TextView
@@ -74,6 +85,8 @@
         android:layout_height="wrap_content"
         tools:text="01559541265"
         app:layout_constraintTop_toBottomOf="@id/emailTitle"
-        app:layout_constraintLeft_toRightOf="@id/phoneTitle"/>
+        app:layout_constraintLeft_toRightOf="@id/phoneTitle"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"/>
 
 </android.support.constraint.ConstraintLayout>

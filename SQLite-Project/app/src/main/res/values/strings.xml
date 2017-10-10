@@ -5,4 +5,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_create_subject">CreateSubjectActivity</string>
+    <string name="registration_no">Registration No:</string>
+    <string name="email">Email:</string>
+    <string name="phone">Phone:</string>
+    <string name="cross_image_content_description">Delete student from SQLite database</string>
+    <string name="empty_student_list_message">Student List is Empty!</string>
 </resources>
