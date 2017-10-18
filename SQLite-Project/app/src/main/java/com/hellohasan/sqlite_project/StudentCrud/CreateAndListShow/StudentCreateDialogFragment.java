@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.hellohasan.sqlite_project.Config;
 import com.hellohasan.sqlite_project.Database.DatabaseQueryClass;
@@ -82,8 +81,7 @@ public class StudentCreateDialogFragment extends DialogFragment {
                 if(id>0){
                     studentCreateListener.onStudentCreated(student);
                     getDialog().dismiss();
-                } else
-                    Toast.makeText(getContext(), "Cannot create student!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

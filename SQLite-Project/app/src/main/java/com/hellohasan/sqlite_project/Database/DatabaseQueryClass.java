@@ -4,10 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.widget.Toast;
 
 import com.hellohasan.sqlite_project.Config;
 import com.hellohasan.sqlite_project.StudentCrud.Student;
+import com.hellohasan.sqlite_project.Subject;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
@@ -38,10 +40,10 @@ public class DatabaseQueryClass {
         contentValues.put(Config.COLUMN_STUDENT_EMAIL, student.getEmail());
 
         try {
-            id = sqLiteDatabase.insert(Config.TABLE_STUDENT, null, contentValues);
-        } catch (Exception e){
+            id = sqLiteDatabase.insertOrThrow(Config.TABLE_STUDENT, null, contentValues);
+        } catch (SQLiteException e){
             Logger.d("Exception: " + e.getMessage());
-            Toast.makeText(context, "Operation failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Operation failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
         } finally {
             sqLiteDatabase.close();
         }
@@ -54,7 +56,7 @@ public class DatabaseQueryClass {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
         SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 
-        String SELECT_QUERY = String.format("SELECT %s, %s FROM %s", Config.COLUMN_STUDENT_NAME, Config.COLUMN_REGISTRATION_NUMBER, Config.TABLE_STUDENT);
+        String SELECT_QUERY = String.format("SELECT %s, %s, %s, %s FROM %s", Config.COLUMN_STUDENT_NAME, Config.COLUMN_REGISTRATION_NUMBER, Config.COLUMN_STUDENT_EMAIL, Config.COLUMN_STUDENT_PHONE, Config.TABLE_STUDENT);
         Cursor cursor = null;
         try {
             cursor = sqLiteDatabase.rawQuery(SELECT_QUERY, null);
@@ -64,7 +66,10 @@ public class DatabaseQueryClass {
                     do {
                         String name = cursor.getString(cursor.getColumnIndex(Config.COLUMN_STUDENT_NAME));
                         long registrationNumber = cursor.getLong(cursor.getColumnIndex(Config.COLUMN_STUDENT_REGISTRATION));
-                        studentList.add(new Student(name, registrationNumber));
+                        String email = cursor.getString(cursor.getColumnIndex(Config.COLUMN_STUDENT_EMAIL));
+                        String phone = cursor.getString(cursor.getColumnIndex(Config.COLUMN_STUDENT_PHONE));
+
+                        studentList.add(new Student(name, registrationNumber, email, phone));
                     }   while (cursor.moveToNext());
 
                     return studentList;
@@ -112,14 +117,81 @@ public class DatabaseQueryClass {
         return student;
     }
 
-    public void deleteStudentByRegNum(long registrationNum) {
+    public long deleteStudentByRegNum(long registrationNum) {
+        long deletedRowCount = -1;
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
         SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 
-        sqLiteDatabase.delete(Config.TABLE_STUDENT, Config.COLUMN_STUDENT_REGISTRATION + " = ? ", new String[]{ String.valueOf(registrationNum)});
-        sqLiteDatabase.close();
+        try {
+            deletedRowCount = sqLiteDatabase.delete(Config.TABLE_STUDENT,
+                                    Config.COLUMN_STUDENT_REGISTRATION + " = ? ",
+                                    new String[]{ String.valueOf(registrationNum)});
+        } catch (SQLiteException e){
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+        } finally {
+            sqLiteDatabase.close();
+        }
 
-        deleteAllSubjectsByRegNum(registrationNum);
+        return deletedRowCount;
+
+//        deleteAllSubjectsByRegNum(registrationNum);
+    }
+
+    public long insertSubject(Subject subject, long registrationNo){
+        long rowId = -1;
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Config.COLUMN_SUBJECT_NAME, subject.getName());
+        contentValues.put(Config.COLUMN_SUBJECT_CODE, subject.getCode());
+        contentValues.put(Config.COLUMN_SUBJECT_CREDIT, subject.getCredit());
+        contentValues.put(Config.COLUMN_REGISTRATION_NUMBER, registrationNo);
+
+        try {
+            rowId = sqLiteDatabase.insertOrThrow(Config.TABLE_SUBJECT, null, contentValues);
+        } catch (SQLiteException e){
+            Logger.d(e);
+
+        } finally {
+            sqLiteDatabase.close();
+        }
+
+        return rowId;
+    }
+
+    public List<Subject> getAllSubjectsByRegNo(long registrationNo){
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
+
+        List<Subject> subjectList = null;
+        Cursor cursor = null;
+        try{
+            cursor = sqLiteDatabase.query(Config.TABLE_SUBJECT,
+                            new String[] {Config.COLUMN_SUBJECT_NAME, Config.COLUMN_SUBJECT_CODE, Config.COLUMN_SUBJECT_CREDIT},
+                            Config.COLUMN_REGISTRATION_NUMBER + " = ? ",
+                            new String[] {String.valueOf(registrationNo)},
+                            null, null, null);
+
+            if(cursor!=null && cursor.moveToFirst()){
+                subjectList = new ArrayList<>();
+                do {
+                    String subjectName = cursor.getString(cursor.getColumnIndex(Config.COLUMN_SUBJECT_NAME));
+                    int subjectCode = cursor.getInt(cursor.getColumnIndex(Config.COLUMN_SUBJECT_CODE));
+                    double subjectCredit = cursor.getDouble(cursor.getColumnIndex(Config.COLUMN_SUBJECT_CREDIT));
+
+                    subjectList.add(new Subject(subjectName, subjectCode, subjectCredit));
+                } while (cursor.moveToNext());
+            }
+        } catch (SQLiteException e){
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+        } finally {
+            if(cursor!=null)
+                cursor.close();
+            sqLiteDatabase.close();
+        }
+
+        return subjectList;
     }
 
     private void deleteAllSubjectsByRegNum(long registrationNum) {
@@ -131,20 +203,7 @@ public class DatabaseQueryClass {
         sqLiteDatabase.close();
     }
 
-    public void insertSubject(String name, long registrationNum, String phone, String email){
-        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
-        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(Config.COLUMN_STUDENT_NAME, name);
-        contentValues.put(Config.COLUMN_STUDENT_REGISTRATION, registrationNum);
-        contentValues.put(Config.COLUMN_STUDENT_PHONE, phone);
-        contentValues.put(Config.COLUMN_STUDENT_EMAIL, email);
-
-        sqLiteDatabase.insert(Config.TABLE_STUDENT, null, contentValues);
-
-        sqLiteDatabase.close();
-    }
 //
 //    public List<Student> getAllStudent(){
 //        open();
