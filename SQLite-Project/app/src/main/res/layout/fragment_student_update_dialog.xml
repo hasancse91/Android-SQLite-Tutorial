@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="10dp"
-    tools:context=".Features.CreateStudent.StudentCreateDialogFragment">
+    tools:context=".Features.UpdateStudentInfo.StudentUpdateDialogFragment">
 
     <EditText
         android:id="@+id/studentNameEditText"
@@ -47,13 +47,13 @@
         android:inputType="textEmailAddress"/>
 
     <Button
-        android:id="@+id/createButton"
+        android:id="@+id/updateStudentInfoButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/emailEditText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/cancelButton"
-        android:text="@string/create_button"/>
+        android:text="@string/update"/>
 
     <Button
         android:id="@+id/cancelButton"

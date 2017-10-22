@@ -1,4 +1,4 @@
-package com.hellohasan.sqlite_project.StudentCrud.CreateAndListShow;
+package com.hellohasan.sqlite_project.Features.ShowStudentList;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,9 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.hellohasan.sqlite_project.Database.DatabaseQueryClass;
+import com.hellohasan.sqlite_project.Features.CreateStudent.Student;
+import com.hellohasan.sqlite_project.Features.UpdateStudentInfo.StudentUpdateDialogFragment;
+import com.hellohasan.sqlite_project.Features.UpdateStudentInfo.StudentUpdateListener;
 import com.hellohasan.sqlite_project.R;
-import com.hellohasan.sqlite_project.StudentCrud.Student;
-import com.hellohasan.sqlite_project.Subject;
+import com.hellohasan.sqlite_project.Util.Config;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
@@ -40,10 +42,10 @@ public class StudentListRecyclerViewAdapter extends RecyclerView.Adapter<CustomV
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
         final int itemPosition = position;
-        Student student = studentList.get(position);
+        final Student student = studentList.get(position);
 
         holder.nameTextView.setText(student.getName());
-        holder.registrationNumTextVeiw.setText(String.valueOf(student.getRegistrationNumber()));
+        holder.registrationNumTextView.setText(String.valueOf(student.getRegistrationNumber()));
         holder.emailTextView.setText(student.getEmail());
         holder.phoneTextView.setText(student.getPhoneNumber());
 
@@ -72,15 +74,17 @@ public class StudentListRecyclerViewAdapter extends RecyclerView.Adapter<CustomV
             }
         });
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.editButtonImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                long id = databaseQueryClass.insertSubject(new Subject("DS", 101, 3), studentList.get(itemPosition).getRegistrationNumber());
-
-                Logger.d("Subject Row ID: " + id);
-
-                List<Subject> subjectList = databaseQueryClass.getAllSubjectsByRegNo(studentList.get(itemPosition).getRegistrationNumber());
-                int a = 1+9;
+                StudentUpdateDialogFragment studentUpdateDialogFragment = StudentUpdateDialogFragment.newInstance(student.getRegistrationNumber(), itemPosition, new StudentUpdateListener() {
+                    @Override
+                    public void onStudentInfoUpdated(Student student, int position) {
+                        studentList.set(position, student);
+                        notifyDataSetChanged();
+                    }
+                });
+                studentUpdateDialogFragment.show(((StudentListActivity) context).getSupportFragmentManager(), Config.UPDATE_STUDENT);
             }
         });
     }
@@ -92,6 +96,7 @@ public class StudentListRecyclerViewAdapter extends RecyclerView.Adapter<CustomV
         if(count>0){
             studentList.remove(position);
             notifyDataSetChanged();
+            ((StudentListActivity) context).viewVisibility();
             Toast.makeText(context, "Student deleted successfully", Toast.LENGTH_LONG).show();
         } else
             Toast.makeText(context, "Student not deleted. Something wrong!", Toast.LENGTH_LONG).show();

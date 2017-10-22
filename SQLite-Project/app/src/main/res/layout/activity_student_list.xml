@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_shadow"
-    tools:context="com.hellohasan.sqlite_project.StudentCrud.CreateAndListShow.StudentListActivity">
+    tools:context=".Features.ShowStudentList.StudentListActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

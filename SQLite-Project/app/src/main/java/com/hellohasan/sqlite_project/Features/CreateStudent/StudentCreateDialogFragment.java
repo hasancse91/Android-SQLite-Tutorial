@@ -1,4 +1,4 @@
-package com.hellohasan.sqlite_project.StudentCrud.CreateAndListShow;
+package com.hellohasan.sqlite_project.Features.CreateStudent;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -9,10 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.hellohasan.sqlite_project.Config;
+import com.hellohasan.sqlite_project.Util.Config;
 import com.hellohasan.sqlite_project.Database.DatabaseQueryClass;
 import com.hellohasan.sqlite_project.R;
-import com.hellohasan.sqlite_project.StudentCrud.Student;
 
 
 public class StudentCreateDialogFragment extends DialogFragment {
@@ -72,13 +71,14 @@ public class StudentCreateDialogFragment extends DialogFragment {
                 phoneString = phoneEditText.getText().toString();
                 emailString = emailEditText.getText().toString();
 
-                Student student = new Student(nameString, registrationNumber, phoneString, emailString);
+                Student student = new Student(-1, nameString, registrationNumber, phoneString, emailString);
 
                 DatabaseQueryClass databaseQueryClass = new DatabaseQueryClass(getContext());
 
                 long id = databaseQueryClass.insertStudent(student);
 
                 if(id>0){
+                    student.setId(id);
                     studentCreateListener.onStudentCreated(student);
                     getDialog().dismiss();
                 }

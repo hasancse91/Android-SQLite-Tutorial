@@ -1,4 +1,4 @@
-package com.hellohasan.sqlite_project.StudentCrud.CreateAndListShow;
+package com.hellohasan.sqlite_project.Features.ShowStudentList;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,18 +10,20 @@ import com.hellohasan.sqlite_project.R;
 public class CustomViewHolder extends RecyclerView.ViewHolder {
 
     TextView nameTextView;
-    TextView registrationNumTextVeiw;
+    TextView registrationNumTextView;
     TextView emailTextView;
     TextView phoneTextView;
     ImageView crossButtonImageView;
+    ImageView editButtonImageView;
 
     public CustomViewHolder(View itemView) {
         super(itemView);
 
         nameTextView = itemView.findViewById(R.id.nameTextView);
-        registrationNumTextVeiw = itemView.findViewById(R.id.registrationNumTextView);
+        registrationNumTextView = itemView.findViewById(R.id.registrationNumTextView);
         emailTextView = itemView.findViewById(R.id.emailTextView);
         phoneTextView = itemView.findViewById(R.id.phoneTextView);
         crossButtonImageView = itemView.findViewById(R.id.crossImageView);
+        editButtonImageView = itemView.findViewById(R.id.editImageView);
     }
 }

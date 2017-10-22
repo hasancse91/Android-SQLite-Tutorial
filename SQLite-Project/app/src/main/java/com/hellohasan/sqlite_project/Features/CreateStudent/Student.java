@@ -1,16 +1,26 @@
-package com.hellohasan.sqlite_project.StudentCrud;
+package com.hellohasan.sqlite_project.Features.CreateStudent;
 
 public class Student {
+    private long id;
     private String name;
     private long registrationNumber;
     private String phoneNumber;
     private String email;
 
-    public Student(String name, long registrationNumber, String phoneNumber, String email) {
+    public Student(int id, String name, long registrationNumber, String phoneNumber, String email) {
+        this.id = id;
         this.name = name;
         this.registrationNumber = registrationNumber;
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {

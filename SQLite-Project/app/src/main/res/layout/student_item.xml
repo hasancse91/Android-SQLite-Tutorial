@@ -23,12 +23,24 @@
         android:textStyle="bold"/>
 
     <ImageView
+        android:id="@+id/editImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/crossImageView"
+        android:src="@drawable/ic_mode_edit_black_24dp"
+        android:alpha="0.5"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:contentDescription="@string/edit_button_description"/>
+
+    <ImageView
         android:id="@+id/crossImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:src="@drawable/ic_close_black_24dp"
+        android:src="@drawable/ic_delete_black_24dp"
         android:alpha="0.5"
         android:contentDescription="@string/cross_image_content_description" />
 

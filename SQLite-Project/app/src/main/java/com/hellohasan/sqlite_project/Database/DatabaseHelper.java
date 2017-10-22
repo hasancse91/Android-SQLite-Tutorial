@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.hellohasan.sqlite_project.Config;
+import com.hellohasan.sqlite_project.Util.Config;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
@@ -43,18 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + Config.COLUMN_STUDENT_EMAIL + " TEXT " //nullable
                 + ")";
 
-        String CREATE_SUBJECT_TABLE = "CREATE TABLE " + Config.TABLE_SUBJECT + "("
-                + Config.COLUMN_SUBJECT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + Config.COLUMN_REGISTRATION_NUMBER + " INTEGER NOT NULL, "
-                + Config.COLUMN_SUBJECT_NAME + " INTEGER NOT NULL, "
-                + Config.COLUMN_SUBJECT_CODE + " INTEGER NOT NULL, "
-                + Config.COLUMN_SUBJECT_CREDIT + " INTEGER, " //nullable
-                + "FOREIGN KEY (" + Config.COLUMN_REGISTRATION_NUMBER + ") REFERENCES " + Config.TABLE_STUDENT + "(" + Config.COLUMN_STUDENT_REGISTRATION + "), "
-                + "CONSTRAINT " + Config.STUDENT_SUB_CONSTRAINT + " UNIQUE (" + Config.COLUMN_REGISTRATION_NUMBER + "," + Config.COLUMN_SUBJECT_CODE + ")"
-                + ")";
-
         db.execSQL(CREATE_STUDENT_TABLE);
-        db.execSQL(CREATE_SUBJECT_TABLE);
 
         Logger.d("DB created!");
     }
@@ -63,17 +52,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + Config.TABLE_STUDENT);
-        db.execSQL("DROP TABLE IF EXISTS " + Config.TABLE_SUBJECT);
 
         // Create tables again
         onCreate(db);
     }
 
-    @Override
-    public void onOpen(SQLiteDatabase db) {
-        super.onOpen(db);
-
-        //enable foreign key constraints like ON UPDATE CASCADE, ON DELETE CASCADE
-        db.execSQL("PRAGMA foreign_keys = ON;");
-    }
 }
