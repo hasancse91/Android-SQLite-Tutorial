@@ -1,7 +1,7 @@
 package com.hellohasan.sqlite_project.Util;
 
 public class Config {
-    //database name
+
     public static final String DATABASE_NAME = "student-db";
 
     //column names of student table

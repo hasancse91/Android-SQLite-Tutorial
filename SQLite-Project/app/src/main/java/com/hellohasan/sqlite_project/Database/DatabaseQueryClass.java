@@ -26,7 +26,6 @@ public class DatabaseQueryClass {
         Logger.addLogAdapter(new AndroidLogAdapter());
     }
 
-
     public long insertStudent(Student student){
 
         long id = -1;
@@ -56,10 +55,18 @@ public class DatabaseQueryClass {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
         SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 
-        String SELECT_QUERY = String.format("SELECT %s, %s, %s, %s, %s FROM %s", Config.COLUMN_STUDENT_ID, Config.COLUMN_STUDENT_NAME, Config.COLUMN_STUDENT_REGISTRATION, Config.COLUMN_STUDENT_EMAIL, Config.COLUMN_STUDENT_PHONE, Config.TABLE_STUDENT);
         Cursor cursor = null;
         try {
-            cursor = sqLiteDatabase.rawQuery(SELECT_QUERY, null);
+
+            cursor = sqLiteDatabase.query(Config.TABLE_STUDENT, null, null, null, null, null, null, null);
+
+            /**
+                 // If you want to execute raw query then uncomment below 2 lines. And comment out above line.
+
+                 String SELECT_QUERY = String.format("SELECT %s, %s, %s, %s, %s FROM %s", Config.COLUMN_STUDENT_ID, Config.COLUMN_STUDENT_NAME, Config.COLUMN_STUDENT_REGISTRATION, Config.COLUMN_STUDENT_EMAIL, Config.COLUMN_STUDENT_PHONE, Config.TABLE_STUDENT);
+                 cursor = sqLiteDatabase.rawQuery(SELECT_QUERY, null);
+             */
+
             if(cursor!=null)
                 if(cursor.moveToFirst()){
                     List<Student> studentList = new ArrayList<>();
@@ -92,11 +99,20 @@ public class DatabaseQueryClass {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
         SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 
-        String SELECT_QUERY = String.format("SELECT * FROM %s WHERE %s = %s", Config.TABLE_STUDENT, Config.COLUMN_STUDENT_REGISTRATION, String.valueOf(registrationNum));
         Cursor cursor = null;
         Student student = null;
         try {
-            cursor = sqLiteDatabase.rawQuery(SELECT_QUERY, null);
+
+            cursor = sqLiteDatabase.query(Config.TABLE_STUDENT, null,
+                    Config.COLUMN_STUDENT_REGISTRATION + " = ? ", new String[]{String.valueOf(registrationNum)},
+                    null, null, null);
+
+            /**
+                 // If you want to execute raw query then uncomment below 2 lines. And comment out above sqLiteDatabase.query() method.
+
+                 String SELECT_QUERY = String.format("SELECT * FROM %s WHERE %s = %s", Config.TABLE_STUDENT, Config.COLUMN_STUDENT_REGISTRATION, String.valueOf(registrationNum));
+                 cursor = sqLiteDatabase.rawQuery(SELECT_QUERY, null);
+             */
 
             if(cursor.moveToFirst()){
                 int id = cursor.getInt(cursor.getColumnIndex(Config.COLUMN_STUDENT_ID));

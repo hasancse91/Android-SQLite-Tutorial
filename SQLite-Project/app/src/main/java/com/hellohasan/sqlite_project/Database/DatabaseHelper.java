@@ -43,6 +43,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + Config.COLUMN_STUDENT_EMAIL + " TEXT " //nullable
                 + ")";
 
+        Logger.d("Table create SQL: " + CREATE_STUDENT_TABLE);
+
         db.execSQL(CREATE_STUDENT_TABLE);
 
         Logger.d("DB created!");
