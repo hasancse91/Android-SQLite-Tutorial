@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SQLite-Project</string>
+    <string name="app_name">SQLite-Single-Table-CRUD</string>
     <string name="action_settings">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -15,5 +15,5 @@
     <string name="cancel_button">Cancel</string>
     <string name="create_button">Create</string>
     <string name="all_delete">All Delete</string>
-    <string name="edit_button_description">Edit Single studnet information</string>
+    <string name="edit_button_description">Edit Single student information</string>
 </resources>

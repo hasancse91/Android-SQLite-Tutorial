@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">SQLite-Multiple-Tables-CRUD</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_create_subject">CreateSubjectActivity</string>
+    <string name="registration_no">Registration No</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="cross_image_content_description">Delete student from SQLite database</string>
+    <string name="empty_student_list_message">Student List is Empty!</string>
+    <string name="student_name">Student Name</string>
+    <string name="update">Update</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="create_button">Create</string>
+    <string name="all_delete">All Delete</string>
+    <string name="edit_button_description">Edit Single student information</string>
+</resources>
