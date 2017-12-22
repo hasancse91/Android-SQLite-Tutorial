@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Features.ShowStudentList.StudentListActivity">
+    tools:context=".Features.StudentCRUD.ShowStudentList.StudentListActivity">
     <item
         android:id="@+id/action_delete"
         android:icon="@drawable/ic_delete_white_24dp"

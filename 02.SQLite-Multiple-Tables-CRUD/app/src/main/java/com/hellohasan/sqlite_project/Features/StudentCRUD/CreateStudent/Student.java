@@ -1,4 +1,4 @@
-package com.hellohasan.sqlite_project.Features.CreateStudent;
+package com.hellohasan.sqlite_project.Features.StudentCRUD.CreateStudent;
 
 public class Student {
     private long id;

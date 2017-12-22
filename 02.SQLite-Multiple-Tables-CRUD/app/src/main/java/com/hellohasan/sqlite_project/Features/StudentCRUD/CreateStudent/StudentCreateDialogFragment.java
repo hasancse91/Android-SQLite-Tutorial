@@ -1,4 +1,4 @@
-package com.hellohasan.sqlite_project.Features.CreateStudent;
+package com.hellohasan.sqlite_project.Features.StudentCRUD.CreateStudent;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -91,7 +91,6 @@ public class StudentCreateDialogFragment extends DialogFragment {
                 getDialog().dismiss();
             }
         });
-
 
         return view;
     }

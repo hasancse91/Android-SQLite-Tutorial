@@ -8,7 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.widget.Toast;
 
-import com.hellohasan.sqlite_project.Features.CreateStudent.Student;
+import com.hellohasan.sqlite_project.Features.StudentCRUD.CreateStudent.Student;
+import com.hellohasan.sqlite_project.Features.SubjectCRUD.CreateSubject.Subject;
 import com.hellohasan.sqlite_project.Util.Config;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
@@ -16,6 +17,7 @@ import com.orhanobut.logger.Logger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 
 public class DatabaseQueryClass {
 
@@ -203,6 +205,73 @@ public class DatabaseQueryClass {
         }
 
         return deleteStatus;
+    }
+
+    // subjects
+    public long insertSubject(Subject subject, long registrationNo){
+        long rowId = -1;
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Config.COLUMN_SUBJECT_NAME, subject.getName());
+        contentValues.put(Config.COLUMN_SUBJECT_CODE, subject.getCode());
+        contentValues.put(Config.COLUMN_SUBJECT_CREDIT, subject.getCredit());
+        contentValues.put(Config.COLUMN_REGISTRATION_NUMBER, registrationNo);
+
+        try {
+            rowId = sqLiteDatabase.insertOrThrow(Config.TABLE_SUBJECT, null, contentValues);
+        } catch (SQLiteException e){
+            Logger.d(e);
+        } finally {
+            sqLiteDatabase.close();
+        }
+
+        return rowId;
+    }
+
+    public List<Subject> getAllSubjectsByRegNo(long registrationNo){
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
+
+        List<Subject> subjectList = null;
+        Cursor cursor = null;
+        try{
+            cursor = sqLiteDatabase.query(Config.TABLE_SUBJECT,
+                    new String[] {Config.COLUMN_SUBJECT_ID, Config.COLUMN_SUBJECT_NAME, Config.COLUMN_SUBJECT_CODE, Config.COLUMN_SUBJECT_CREDIT},
+                    Config.COLUMN_REGISTRATION_NUMBER + " = ? ",
+                    new String[] {String.valueOf(registrationNo)},
+                    null, null, null);
+
+            if(cursor!=null && cursor.moveToFirst()){
+                subjectList = new ArrayList<>();
+                do {
+                    int id = cursor.getInt(cursor.getColumnIndex(Config.COLUMN_SUBJECT_ID));
+                    String subjectName = cursor.getString(cursor.getColumnIndex(Config.COLUMN_SUBJECT_NAME));
+                    int subjectCode = cursor.getInt(cursor.getColumnIndex(Config.COLUMN_SUBJECT_CODE));
+                    double subjectCredit = cursor.getDouble(cursor.getColumnIndex(Config.COLUMN_SUBJECT_CREDIT));
+
+                    subjectList.add(new Subject(id, subjectName, subjectCode, subjectCredit));
+                } while (cursor.moveToNext());
+            }
+        } catch (SQLiteException e){
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+        } finally {
+            if(cursor!=null)
+                cursor.close();
+            sqLiteDatabase.close();
+        }
+
+        return subjectList;
+    }
+
+    private void deleteAllSubjectsByRegNum(long registrationNum) {
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+
+        String DELETE_QUERY = "DELETE FROM " + Config.TABLE_SUBJECT + " WHERE " + Config.COLUMN_REGISTRATION_NUMBER + " = " + registrationNum;
+        sqLiteDatabase.execSQL(DELETE_QUERY);
+        sqLiteDatabase.close();
     }
 
 }

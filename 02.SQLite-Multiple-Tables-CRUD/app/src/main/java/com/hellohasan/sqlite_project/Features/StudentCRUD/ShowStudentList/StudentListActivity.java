@@ -1,4 +1,4 @@
-package com.hellohasan.sqlite_project.Features.ShowStudentList;
+package com.hellohasan.sqlite_project.Features.StudentCRUD.ShowStudentList;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -15,9 +15,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.hellohasan.sqlite_project.Database.DatabaseQueryClass;
-import com.hellohasan.sqlite_project.Features.CreateStudent.Student;
-import com.hellohasan.sqlite_project.Features.CreateStudent.StudentCreateDialogFragment;
-import com.hellohasan.sqlite_project.Features.CreateStudent.StudentCreateListener;
+import com.hellohasan.sqlite_project.Features.StudentCRUD.CreateStudent.Student;
+import com.hellohasan.sqlite_project.Features.StudentCRUD.CreateStudent.StudentCreateDialogFragment;
+import com.hellohasan.sqlite_project.Features.StudentCRUD.CreateStudent.StudentCreateListener;
 import com.hellohasan.sqlite_project.R;
 import com.hellohasan.sqlite_project.Util.Config;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -44,8 +44,8 @@ public class StudentListActivity extends AppCompatActivity implements StudentCre
         setSupportActionBar(toolbar);
         Logger.addLogAdapter(new AndroidLogAdapter());
 
-        recyclerView = (RecyclerView) findViewById(R.id.studentRecyclerView);
-        studentListEmptyTextView = (TextView) findViewById(R.id.emptyStudentListTextView);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        studentListEmptyTextView = (TextView) findViewById(R.id.emptyListTextView);
 
         studentList.addAll(databaseQueryClass.getAllStudent());
 

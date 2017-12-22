@@ -1,4 +1,4 @@
-package com.hellohasan.sqlite_project.Features.ShowStudentList;
+package com.hellohasan.sqlite_project.Features.StudentCRUD.ShowStudentList;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.hellohasan.sqlite_project.Database.DatabaseQueryClass;
-import com.hellohasan.sqlite_project.Features.CreateStudent.Student;
-import com.hellohasan.sqlite_project.Features.UpdateStudentInfo.StudentUpdateDialogFragment;
-import com.hellohasan.sqlite_project.Features.UpdateStudentInfo.StudentUpdateListener;
+import com.hellohasan.sqlite_project.Features.StudentCRUD.CreateStudent.Student;
+import com.hellohasan.sqlite_project.Features.StudentCRUD.UpdateStudentInfo.StudentUpdateDialogFragment;
+import com.hellohasan.sqlite_project.Features.StudentCRUD.UpdateStudentInfo.StudentUpdateListener;
 import com.hellohasan.sqlite_project.R;
 import com.hellohasan.sqlite_project.Util.Config;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -35,7 +35,7 @@ public class StudentListRecyclerViewAdapter extends RecyclerView.Adapter<CustomV
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.student_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_student, parent, false);
         return new CustomViewHolder(view);
     }
 
@@ -85,6 +85,13 @@ public class StudentListRecyclerViewAdapter extends RecyclerView.Adapter<CustomV
                     }
                 });
                 studentUpdateDialogFragment.show(((StudentListActivity) context).getSupportFragmentManager(), Config.UPDATE_STUDENT);
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }

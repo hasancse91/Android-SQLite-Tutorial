@@ -3,65 +3,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="10dp"
-    tools:context=".Features.StudentCRUD.UpdateStudentInfo.StudentUpdateDialogFragment">
+    tools:context="com.hellohasan.sqlite_project.Features.SubjectCRUD.CreateSubject.SubjectCreateDialogFragment">
 
     <EditText
-        android:id="@+id/studentNameEditText"
+        android:id="@+id/subjectNameEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:hint="@string/student_name"
+        android:hint="@string/subject_name"
         android:inputType="textPersonName"/>
 
     <EditText
-        android:id="@+id/registrationEditText"
+        android:id="@+id/subjectCodeEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/studentNameEditText"
-        android:hint="@string/registration_no"
+        app:layout_constraintTop_toBottomOf="@+id/subjectNameEditText"
+        android:hint="@string/subject_code"
         android:inputType="number"/>
 
     <EditText
-        android:id="@+id/phoneEditText"
+        android:id="@+id/subjectCreditEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registrationEditText"
-        android:hint="@string/phone"
+        app:layout_constraintTop_toBottomOf="@+id/subjectCodeEditText"
+        android:hint="@string/subject_credit"
         android:inputType="phone"/>
 
-    <EditText
-        android:id="@+id/emailEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneEditText"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"/>
-
     <Button
-        android:id="@+id/updateStudentInfoButton"
+        android:id="@+id/createButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/emailEditText"
+        app:layout_constraintTop_toBottomOf="@id/subjectCreditEditText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/cancelButton"
-        android:text="@string/update"/>
+        android:text="@string/create_button"/>
 
     <Button
         android:id="@+id/cancelButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/emailEditText"
+        app:layout_constraintTop_toTopOf="@id/createButton"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/createButton"
+        app:layout_constraintLeft_toRightOf="@id/createButton"
         android:text="@string/cancel_button"/>
 
 </android.support.constraint.ConstraintLayout>

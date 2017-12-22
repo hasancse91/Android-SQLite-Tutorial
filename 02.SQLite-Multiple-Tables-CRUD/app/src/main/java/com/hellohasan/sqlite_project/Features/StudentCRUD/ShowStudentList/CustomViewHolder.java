@@ -1,4 +1,4 @@
-package com.hellohasan.sqlite_project.Features.ShowStudentList;
+package com.hellohasan.sqlite_project.Features.StudentCRUD.ShowStudentList;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

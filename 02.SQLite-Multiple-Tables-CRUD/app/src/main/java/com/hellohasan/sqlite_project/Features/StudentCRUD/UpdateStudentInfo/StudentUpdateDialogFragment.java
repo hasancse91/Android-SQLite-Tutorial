@@ -1,4 +1,4 @@
-package com.hellohasan.sqlite_project.Features.UpdateStudentInfo;
+package com.hellohasan.sqlite_project.Features.StudentCRUD.UpdateStudentInfo;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.hellohasan.sqlite_project.Database.DatabaseQueryClass;
-import com.hellohasan.sqlite_project.Features.CreateStudent.Student;
+import com.hellohasan.sqlite_project.Features.StudentCRUD.CreateStudent.Student;
 import com.hellohasan.sqlite_project.R;
 import com.hellohasan.sqlite_project.Util.Config;
 

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="10dp"
-    tools:context=".Features.CreateStudent.StudentCreateDialogFragment">
+    tools:context=".Features.StudentCRUD.CreateStudent.StudentCreateDialogFragment">
 
     <EditText
         android:id="@+id/studentNameEditText"
