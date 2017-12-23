@@ -28,4 +28,5 @@ public class Config {
     public static final String CREATE_SUBJECT = "create_subject";
     public static final String UPDATE_SUBJECT = "update_subject";
 
+    public static final String STUDENT_REGISTRATION = "student_registration";
 }

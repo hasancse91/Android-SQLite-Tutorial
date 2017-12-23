@@ -2,6 +2,7 @@ package com.hellohasan.sqlite_project.Features.StudentCRUD.ShowStudentList;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import com.hellohasan.sqlite_project.Database.DatabaseQueryClass;
 import com.hellohasan.sqlite_project.Features.StudentCRUD.CreateStudent.Student;
 import com.hellohasan.sqlite_project.Features.StudentCRUD.UpdateStudentInfo.StudentUpdateDialogFragment;
 import com.hellohasan.sqlite_project.Features.StudentCRUD.UpdateStudentInfo.StudentUpdateListener;
+import com.hellohasan.sqlite_project.Features.SubjectCRUD.ShowSubjectList.SubjectListActivity;
 import com.hellohasan.sqlite_project.R;
 import com.hellohasan.sqlite_project.Util.Config;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -91,7 +93,9 @@ public class StudentListRecyclerViewAdapter extends RecyclerView.Adapter<CustomV
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(context, SubjectListActivity.class);
+                intent.putExtra(Config.STUDENT_REGISTRATION, student.getRegistrationNumber());
+                context.startActivity(intent);
             }
         });
     }

@@ -9,20 +9,18 @@ import com.hellohasan.sqlite_project.R;
 
 public class CustomViewHolder extends RecyclerView.ViewHolder {
 
-    TextView nameTextView;
-    TextView registrationNumTextView;
-    TextView emailTextView;
-    TextView phoneTextView;
+    TextView subjectNameTextView;
+    TextView subjectCodeTextView;
+    TextView subjectCreditTextView;
     ImageView crossButtonImageView;
     ImageView editButtonImageView;
 
     public CustomViewHolder(View itemView) {
         super(itemView);
 
-        nameTextView = itemView.findViewById(R.id.nameTextView);
-        registrationNumTextView = itemView.findViewById(R.id.registrationNumTextView);
-        emailTextView = itemView.findViewById(R.id.emailTextView);
-        phoneTextView = itemView.findViewById(R.id.phoneTextView);
+        subjectNameTextView = itemView.findViewById(R.id.subjectNameTextView);
+        subjectCodeTextView = itemView.findViewById(R.id.subjectCodeTextView);
+        subjectCreditTextView = itemView.findViewById(R.id.subjectCreditTextView);
         crossButtonImageView = itemView.findViewById(R.id.crossImageView);
         editButtonImageView = itemView.findViewById(R.id.editImageView);
     }

@@ -234,7 +234,7 @@ public class DatabaseQueryClass {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
         SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 
-        List<Subject> subjectList = null;
+        List<Subject> subjectList = new ArrayList<>();
         Cursor cursor = null;
         try{
             cursor = sqLiteDatabase.query(Config.TABLE_SUBJECT,
