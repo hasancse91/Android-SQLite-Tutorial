@@ -230,6 +230,31 @@ public class DatabaseQueryClass {
         return rowId;
     }
 
+    public long updateSubjectInfo(Subject subject){
+
+        long rowCount = 0;
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Config.COLUMN_SUBJECT_NAME, subject.getName());
+        contentValues.put(Config.COLUMN_SUBJECT_CODE, subject.getCode());
+        contentValues.put(Config.COLUMN_SUBJECT_CREDIT, subject.getCredit());
+
+        try {
+            rowCount = sqLiteDatabase.update(Config.TABLE_SUBJECT, contentValues,
+                    Config.COLUMN_STUDENT_ID + " = ? ",
+                    new String[] {String.valueOf(subject.getId())});
+        } catch (SQLiteException e){
+            Logger.d("Exception: " + e.getMessage());
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+        } finally {
+            sqLiteDatabase.close();
+        }
+
+        return rowCount;
+    }
+
     public List<Subject> getAllSubjectsByRegNo(long registrationNo){
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
         SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
@@ -265,13 +290,24 @@ public class DatabaseQueryClass {
         return subjectList;
     }
 
-    private void deleteAllSubjectsByRegNum(long registrationNum) {
+    public boolean deleteSubjectById(long subjectId) {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
         SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 
-        String DELETE_QUERY = "DELETE FROM " + Config.TABLE_SUBJECT + " WHERE " + Config.COLUMN_REGISTRATION_NUMBER + " = " + registrationNum;
-        sqLiteDatabase.execSQL(DELETE_QUERY);
-        sqLiteDatabase.close();
+        int row = sqLiteDatabase.delete(Config.TABLE_SUBJECT,
+                Config.COLUMN_SUBJECT_ID + " = ? ", new String[]{String.valueOf(subjectId)});
+
+        return row > 0;
+    }
+
+    public boolean deleteAllSubjectsByRegNum(long registrationNum) {
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+
+        int row = sqLiteDatabase.delete(Config.TABLE_SUBJECT,
+                Config.COLUMN_REGISTRATION_NUMBER + " = ? ", new String[]{String.valueOf(registrationNum)});
+
+        return row > 0;
     }
 
 }

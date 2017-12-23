@@ -1,6 +1,8 @@
 package com.hellohasan.sqlite_project.Features.SubjectCRUD.ShowSubjectList;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,7 @@ public class SubjectListRecyclerViewAdapter extends RecyclerView.Adapter<CustomV
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
+        final int itemPosition = position;
         Subject subject = subjectList.get(position);
 
         holder.subjectNameTextView.setText(subject.getName());
@@ -38,7 +41,25 @@ public class SubjectListRecyclerViewAdapter extends RecyclerView.Adapter<CustomV
         holder.crossButtonImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                alertDialogBuilder.setMessage("Are you sure, You wanted to delete this subject?");
+                alertDialogBuilder.setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                deleteSubject(itemPosition);
+                            }
+                        });
 
+                alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
             }
         });
 
@@ -48,6 +69,10 @@ public class SubjectListRecyclerViewAdapter extends RecyclerView.Adapter<CustomV
 
             }
         });
+    }
+
+    private void deleteSubject(int itemPosition) {
+
     }
 
     @Override

@@ -20,4 +20,6 @@
     <string name="student_information">Student Information</string>
     <string name="name">Name</string>
     <string name="registration_no_with_color">Registration Number: </string>
+    <string name="subject_list">Subject List</string>
+    <string name="student_list">Student List</string>
 </resources>
