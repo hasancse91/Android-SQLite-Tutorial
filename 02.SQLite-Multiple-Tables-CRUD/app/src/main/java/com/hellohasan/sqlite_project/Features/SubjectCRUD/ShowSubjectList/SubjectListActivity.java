@@ -32,6 +32,7 @@ public class SubjectListActivity extends AppCompatActivity implements SubjectCre
 
     private List<Subject> subjectList = new ArrayList<>();
 
+    private TextView summaryTextView;
     private TextView subjectListEmptyTextView;
     private RecyclerView recyclerView;
     private SubjectListRecyclerViewAdapter subjectListRecyclerViewAdapter;
@@ -45,6 +46,7 @@ public class SubjectListActivity extends AppCompatActivity implements SubjectCre
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        summaryTextView = findViewById(R.id.summaryTextView);
         subjectListEmptyTextView = (TextView) findViewById(R.id.emptyListTextView);
 
         studentRegNo = getIntent().getLongExtra(Config.STUDENT_REGISTRATION, -1);
@@ -66,6 +68,13 @@ public class SubjectListActivity extends AppCompatActivity implements SubjectCre
         });
     }
 
+    private void printSummary() {
+        long studentNum = databaseQueryClass.getNumberOfStudent();
+        long subjectNum = databaseQueryClass.getNumberOfSubject();
+
+        summaryTextView.setText(getResources().getString(R.string.database_summary, studentNum, subjectNum));
+    }
+
     private void openSubjectCreateDialog() {
         SubjectCreateDialogFragment subjectCreateDialogFragment = SubjectCreateDialogFragment.newInstance(studentRegNo, this);
         subjectCreateDialogFragment.show(getSupportFragmentManager(), Config.CREATE_SUBJECT);
@@ -83,6 +92,7 @@ public class SubjectListActivity extends AppCompatActivity implements SubjectCre
             subjectListEmptyTextView.setVisibility(View.VISIBLE);
         else
             subjectListEmptyTextView.setVisibility(View.GONE);
+        printSummary();
     }
 
     @Override

@@ -9,13 +9,21 @@
     tools:showIn="@layout/activity_student_list"
     android:layout_marginBottom="8dp">
 
+    <TextView
+        android:id="@+id/summaryTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/database_summary"
+        android:padding="8dp"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/summaryTextView"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="16dp">
 
     </android.support.v7.widget.RecyclerView>
 

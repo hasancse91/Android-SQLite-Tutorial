@@ -46,14 +46,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String CREATE_SUBJECT_TABLE = "CREATE TABLE " + Config.TABLE_SUBJECT + "("
                 + Config.COLUMN_SUBJECT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + Config.COLUMN_REGISTRATION_NUMBER + " INTEGER NOT NULL, "
-                + Config.COLUMN_SUBJECT_NAME + " INTEGER NOT NULL, "
+                + Config.COLUMN_SUBJECT_NAME + " TEXT NOT NULL, "
                 + Config.COLUMN_SUBJECT_CODE + " INTEGER NOT NULL, "
-                + Config.COLUMN_SUBJECT_CREDIT + " INTEGER, " //nullable
+                + Config.COLUMN_SUBJECT_CREDIT + " NUMBER, " //nullable
                 + "FOREIGN KEY (" + Config.COLUMN_REGISTRATION_NUMBER + ") REFERENCES " + Config.TABLE_STUDENT + "(" + Config.COLUMN_STUDENT_REGISTRATION + "), "
                 + "CONSTRAINT " + Config.STUDENT_SUB_CONSTRAINT + " UNIQUE (" + Config.COLUMN_REGISTRATION_NUMBER + "," + Config.COLUMN_SUBJECT_CODE + ")"
                 + ")";
-
-        Logger.d("Table create SQL: " + CREATE_STUDENT_TABLE);
 
         db.execSQL(CREATE_STUDENT_TABLE);
         db.execSQL(CREATE_SUBJECT_TABLE);
@@ -76,7 +74,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super.onOpen(db);
 
         //enable foreign key constraints like ON UPDATE CASCADE, ON DELETE CASCADE
-        db.execSQL("PRAGMA foreign_keys = 1;"); //you should use `ON` instead of 1
+        db.execSQL("PRAGMA foreign_keys=1;"); //you should use `ON` instead of 0
     }
 
 }

@@ -207,6 +207,23 @@ public class DatabaseQueryClass {
         return deleteStatus;
     }
 
+    public long getNumberOfStudent(){
+        long count = -1;
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+
+        try {
+            count = DatabaseUtils.queryNumEntries(sqLiteDatabase, Config.TABLE_STUDENT);
+        } catch (SQLiteException e){
+            Logger.d("Exception: " + e.getMessage());
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+        } finally {
+            sqLiteDatabase.close();
+        }
+
+        return count;
+    }
+
     // subjects
     public long insertSubject(Subject subject, long registrationNo){
         long rowId = -1;
@@ -308,6 +325,23 @@ public class DatabaseQueryClass {
                 Config.COLUMN_REGISTRATION_NUMBER + " = ? ", new String[]{String.valueOf(registrationNum)});
 
         return row > 0;
+    }
+
+    public long getNumberOfSubject(){
+        long count = -1;
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+
+        try {
+            count = DatabaseUtils.queryNumEntries(sqLiteDatabase, Config.TABLE_SUBJECT);
+        } catch (SQLiteException e){
+            Logger.d("Exception: " + e.getMessage());
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+        } finally {
+            sqLiteDatabase.close();
+        }
+
+        return count;
     }
 
 }

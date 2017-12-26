@@ -32,6 +32,7 @@ public class StudentListActivity extends AppCompatActivity implements StudentCre
 
     private List<Student> studentList = new ArrayList<>();
 
+    private TextView summaryTextView;
     private TextView studentListEmptyTextView;
     private RecyclerView recyclerView;
     private StudentListRecyclerViewAdapter studentListRecyclerViewAdapter;
@@ -40,12 +41,13 @@ public class StudentListActivity extends AppCompatActivity implements StudentCre
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_list);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Logger.addLogAdapter(new AndroidLogAdapter());
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        studentListEmptyTextView = (TextView) findViewById(R.id.emptyListTextView);
+        recyclerView = findViewById(R.id.recyclerView);
+        summaryTextView = findViewById(R.id.summaryTextView);
+        studentListEmptyTextView = findViewById(R.id.emptyListTextView);
 
         studentList.addAll(databaseQueryClass.getAllStudent());
 
@@ -63,6 +65,14 @@ public class StudentListActivity extends AppCompatActivity implements StudentCre
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        printSummary();
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -111,11 +121,19 @@ public class StudentListActivity extends AppCompatActivity implements StudentCre
             studentListEmptyTextView.setVisibility(View.VISIBLE);
         else
             studentListEmptyTextView.setVisibility(View.GONE);
+        printSummary();
     }
 
     private void openStudentCreateDialog() {
         StudentCreateDialogFragment studentCreateDialogFragment = StudentCreateDialogFragment.newInstance("Create Student", this);
         studentCreateDialogFragment.show(getSupportFragmentManager(), Config.CREATE_STUDENT);
+    }
+
+    private void printSummary() {
+        long studentNum = databaseQueryClass.getNumberOfStudent();
+        long subjectNum = databaseQueryClass.getNumberOfSubject();
+
+        summaryTextView.setText(getResources().getString(R.string.database_summary, studentNum, subjectNum));
     }
 
     @Override
