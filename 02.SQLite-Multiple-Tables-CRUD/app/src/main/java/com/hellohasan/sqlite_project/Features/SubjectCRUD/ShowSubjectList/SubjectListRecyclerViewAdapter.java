@@ -7,7 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.hellohasan.sqlite_project.Database.DatabaseQueryClass;
 import com.hellohasan.sqlite_project.Features.SubjectCRUD.CreateSubject.Subject;
 import com.hellohasan.sqlite_project.R;
 
@@ -31,8 +33,7 @@ public class SubjectListRecyclerViewAdapter extends RecyclerView.Adapter<CustomV
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
-        final int itemPosition = position;
-        Subject subject = subjectList.get(position);
+        final Subject subject = subjectList.get(position);
 
         holder.subjectNameTextView.setText(subject.getName());
         holder.subjectCodeTextView.setText(String.valueOf(subject.getCode()));
@@ -47,7 +48,7 @@ public class SubjectListRecyclerViewAdapter extends RecyclerView.Adapter<CustomV
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface arg0, int arg1) {
-                                deleteSubject(itemPosition);
+                                deleteSubject(subject);
                             }
                         });
 
@@ -71,7 +72,15 @@ public class SubjectListRecyclerViewAdapter extends RecyclerView.Adapter<CustomV
         });
     }
 
-    private void deleteSubject(int itemPosition) {
+    private void deleteSubject(Subject subject) {
+        DatabaseQueryClass databaseQueryClass = new DatabaseQueryClass(context);
+        boolean isDeleted = databaseQueryClass.deleteSubjectById(subject.getId());
+
+        if(isDeleted) {
+            subjectList.remove(subject);
+            notifyDataSetChanged();
+        } else
+            Toast.makeText(context, "Cannot delete!", Toast.LENGTH_SHORT).show();
 
     }
 
