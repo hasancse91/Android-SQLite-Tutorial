@@ -247,6 +247,36 @@ public class DatabaseQueryClass {
         return rowId;
     }
 
+    public Subject getSubjectById(long subjectId){
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(context);
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
+
+        Subject subject = null;
+
+        Cursor cursor = null;
+        try{
+            cursor = sqLiteDatabase.query(Config.TABLE_SUBJECT, null,
+                    Config.COLUMN_SUBJECT_ID + " = ? ", new String[] {String.valueOf(subjectId)},
+                    null, null, null);
+
+            if(cursor!=null && cursor.moveToFirst()){
+                String subjectName = cursor.getString(cursor.getColumnIndex(Config.COLUMN_SUBJECT_NAME));
+                int subjectCode = cursor.getInt(cursor.getColumnIndex(Config.COLUMN_SUBJECT_CODE));
+                double subjectCredit = cursor.getDouble(cursor.getColumnIndex(Config.COLUMN_SUBJECT_CREDIT));
+
+                subject = new Subject(subjectId, subjectName, subjectCode, subjectCredit);
+            }
+        } catch (SQLiteException e){
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+        } finally {
+            if(cursor!=null)
+                cursor.close();
+            sqLiteDatabase.close();
+        }
+
+        return subject;
+    }
+
     public long updateSubjectInfo(Subject subject){
 
         long rowCount = 0;
@@ -260,7 +290,7 @@ public class DatabaseQueryClass {
 
         try {
             rowCount = sqLiteDatabase.update(Config.TABLE_SUBJECT, contentValues,
-                    Config.COLUMN_STUDENT_ID + " = ? ",
+                    Config.COLUMN_SUBJECT_ID + " = ? ",
                     new String[] {String.valueOf(subject.getId())});
         } catch (SQLiteException e){
             Logger.d("Exception: " + e.getMessage());

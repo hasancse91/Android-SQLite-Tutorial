@@ -23,4 +23,8 @@
     <string name="subject_list">Subject List</string>
     <string name="student_list">Student List</string>
     <string name="database_summary">Total Student: %1$d. Total Subject: %2$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="update_button">Update</string>
 </resources>

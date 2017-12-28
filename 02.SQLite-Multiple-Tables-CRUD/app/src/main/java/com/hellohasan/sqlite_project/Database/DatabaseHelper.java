@@ -49,7 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + Config.COLUMN_SUBJECT_NAME + " TEXT NOT NULL, "
                 + Config.COLUMN_SUBJECT_CODE + " INTEGER NOT NULL, "
                 + Config.COLUMN_SUBJECT_CREDIT + " REAL, " //nullable
-                + "FOREIGN KEY (" + Config.COLUMN_REGISTRATION_NUMBER + ") REFERENCES " + Config.TABLE_STUDENT + "(" + Config.COLUMN_STUDENT_REGISTRATION + ")  ON DELETE CASCADE , "
+                + "FOREIGN KEY (" + Config.COLUMN_REGISTRATION_NUMBER + ") REFERENCES " + Config.TABLE_STUDENT + "(" + Config.COLUMN_STUDENT_REGISTRATION + ") ON UPDATE CASCADE ON DELETE CASCADE, "
                 + "CONSTRAINT " + Config.STUDENT_SUB_CONSTRAINT + " UNIQUE (" + Config.COLUMN_REGISTRATION_NUMBER + "," + Config.COLUMN_SUBJECT_CODE + ")"
                 + ")";
 

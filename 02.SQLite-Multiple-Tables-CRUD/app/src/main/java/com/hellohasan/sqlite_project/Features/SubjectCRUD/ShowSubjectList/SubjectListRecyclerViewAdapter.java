@@ -11,7 +11,10 @@ import android.widget.Toast;
 
 import com.hellohasan.sqlite_project.Database.DatabaseQueryClass;
 import com.hellohasan.sqlite_project.Features.SubjectCRUD.CreateSubject.Subject;
+import com.hellohasan.sqlite_project.Features.SubjectCRUD.UpdateSubjectInfo.SubjectUpdateDialogFragment;
+import com.hellohasan.sqlite_project.Features.SubjectCRUD.UpdateSubjectInfo.SubjectUpdateListener;
 import com.hellohasan.sqlite_project.R;
+import com.hellohasan.sqlite_project.Util.Config;
 
 import java.util.List;
 
@@ -33,6 +36,7 @@ public class SubjectListRecyclerViewAdapter extends RecyclerView.Adapter<CustomV
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
+        final int listPosition = position;
         final Subject subject = subjectList.get(position);
 
         holder.subjectNameTextView.setText(subject.getName());
@@ -67,9 +71,20 @@ public class SubjectListRecyclerViewAdapter extends RecyclerView.Adapter<CustomV
         holder.editButtonImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                editSubject(subject.getId(), listPosition);
             }
         });
+    }
+
+    private void editSubject(long subjectId, int listPosition){
+        SubjectUpdateDialogFragment subjectUpdateDialogFragment = SubjectUpdateDialogFragment.newInstance(subjectId, listPosition, new SubjectUpdateListener() {
+            @Override
+            public void onSubjectInfoUpdate(Subject subject, int position) {
+                subjectList.set(position, subject);
+                notifyDataSetChanged();
+            }
+        });
+        subjectUpdateDialogFragment.show(((SubjectListActivity) context).getSupportFragmentManager(), Config.UPDATE_SUBJECT);
     }
 
     private void deleteSubject(Subject subject) {
@@ -79,9 +94,9 @@ public class SubjectListRecyclerViewAdapter extends RecyclerView.Adapter<CustomV
         if(isDeleted) {
             subjectList.remove(subject);
             notifyDataSetChanged();
+            ((SubjectListActivity) context).viewVisibility();
         } else
             Toast.makeText(context, "Cannot delete!", Toast.LENGTH_SHORT).show();
-
     }
 
     @Override

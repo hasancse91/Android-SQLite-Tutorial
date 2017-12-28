@@ -45,9 +45,9 @@ public class SubjectListActivity extends AppCompatActivity implements SubjectCre
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
         summaryTextView = findViewById(R.id.summaryTextView);
-        subjectListEmptyTextView = (TextView) findViewById(R.id.emptyListTextView);
+        subjectListEmptyTextView = findViewById(R.id.emptyListTextView);
 
         studentRegNo = getIntent().getLongExtra(Config.STUDENT_REGISTRATION, -1);
 
@@ -59,7 +59,7 @@ public class SubjectListActivity extends AppCompatActivity implements SubjectCre
 
         viewVisibility();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
