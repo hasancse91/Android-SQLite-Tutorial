@@ -1,4 +1,4 @@
-# Android-SQLite-Tutorial
+# Android SQLite Tutorial - Single Table CRUD Operation
 
 We'll design this type of sample Android App using `SQLite` database. To get full project just clone the repository. In this README file I've added some important classes.
 
