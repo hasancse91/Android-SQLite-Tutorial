@@ -2,7 +2,7 @@
 
 We'll design this type of sample Android App using `SQLite` database to store data. Here I've created two tables `student` and `subject`. A student has one or multiple subjects. The relation between these tables is implemented by `foreign key` with `ON UPDATE CASCADE ON DELETE CASCADE`.
 
-<img src="https://raw.githubusercontent.com/hasancse91/Android-SQLite-Tutorial/master/sqlite-app-screenshot.gif" width="250" height="444" />
+<img src="https://raw.githubusercontent.com/hasancse91/Android-SQLite-Tutorial/master/data/Android-SQLite-Multiple-table-CRUD.gif" width="250" height="444" />
 
 ### DatabaseHelper.java class
 ```java
