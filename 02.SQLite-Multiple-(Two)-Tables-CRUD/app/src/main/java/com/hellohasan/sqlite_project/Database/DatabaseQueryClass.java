@@ -240,6 +240,7 @@ public class DatabaseQueryClass {
             rowId = sqLiteDatabase.insertOrThrow(Config.TABLE_SUBJECT, null, contentValues);
         } catch (SQLiteException e){
             Logger.d(e);
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         } finally {
             sqLiteDatabase.close();
         }
