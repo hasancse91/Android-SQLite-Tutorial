@@ -1,4 +1,4 @@
-# Android SQLite Multiple Table CRUD Tutorial
+# Android SQLite Multiple (Two) Tables CRUD Tutorial
 
 We'll design this type of sample Android App using `SQLite` database to store data. Here I've created two tables `student` and `subject`. A student has one or multiple subjects. The relation between these tables is implemented by `foreign key` with `ON UPDATE CASCADE ON DELETE CASCADE`.
 
