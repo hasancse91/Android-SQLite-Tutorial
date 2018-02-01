@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.hellohasan.sqlite_multiple_three_tables_crud.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_add_subject"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:title="@string/action_add_subject"
+        android:icon="@drawable/ic_add_subject_24dp"
+        app:showAsAction="ifRoom" />
 </menu>
