@@ -2,4 +2,6 @@
     <string name="app_name">SQLite Three Tables CRUD</string>
     <string name="action_settings">Settings</string>
     <string name="action_add_subject">Add Subject</string>
+    <string name="course_code">Course Code: %d</string>
+    <string name="course_credit">Course Credit: %f</string>
 </resources>
