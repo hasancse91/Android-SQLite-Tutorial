@@ -6,4 +6,10 @@
     <string name="course_credit">Course Credit: %f</string>
     <string name="title_activity_subjects">Subject List</string>
     <string name="no_data_found">No data found in list!</string>
+    <string name="registration_no">Registration Number:</string>
+    <string name="email">Email:</string>
+    <string name="phone">Phone:</string>
+    <string name="student_count">Student Count: %d</string>
+    <string name="subject_count">Subject Count: %d</string>
+    <string name="taken_subject_count">Taken Subject Count: %d</string>
 </resources>
