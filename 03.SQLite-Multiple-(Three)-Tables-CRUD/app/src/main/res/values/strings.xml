@@ -4,4 +4,6 @@
     <string name="action_add_subject">Add Subject</string>
     <string name="course_code">Course Code: %d</string>
     <string name="course_credit">Course Credit: %f</string>
+    <string name="title_activity_subjects">Subject List</string>
+    <string name="no_data_found">No data found in list!</string>
 </resources>
