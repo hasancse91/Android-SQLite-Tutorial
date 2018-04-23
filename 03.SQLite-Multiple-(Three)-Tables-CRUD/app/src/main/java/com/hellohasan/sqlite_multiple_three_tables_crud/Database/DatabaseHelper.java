@@ -1,10 +1,10 @@
-package com.hellohasan.sqlite_multiple_three_tables_crud.Database;
+package com.hellohasan.sqlite_multiple_three_tables_crud.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import static com.hellohasan.sqlite_multiple_three_tables_crud.Util.Constants.*;
+import static com.hellohasan.sqlite_multiple_three_tables_crud.util.Constants.*;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -28,27 +28,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
         String CREATE_STUDENT_TABLE = "CREATE TABLE " + TABLE_STUDENT + "("
-                + COLUMN_STUDENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + COLUMN_STUDENT_NAME + " TEXT NOT NULL, "
-                + COLUMN_STUDENT_REGISTRATION + " INTEGER NOT NULL UNIQUE, "
-                + COLUMN_STUDENT_PHONE + " TEXT, " //nullable
-                + COLUMN_STUDENT_EMAIL + " TEXT " //nullable
+                + STUDENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + STUDENT_NAME + " TEXT NOT NULL, "
+                + STUDENT_REGISTRATION_NUM + " INTEGER NOT NULL UNIQUE, "
+                + STUDENT_PHONE + " TEXT, " //nullable
+                + STUDENT_EMAIL + " TEXT " //nullable
                 + ")";
 
         String CREATE_SUBJECT_TABLE = "CREATE TABLE " + TABLE_SUBJECT + "("
-                + COLUMN_SUBJECT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + COLUMN_SUBJECT_NAME + " TEXT NOT NULL, "
-                + COLUMN_SUBJECT_CODE + " INTEGER NOT NULL, "
-                + COLUMN_SUBJECT_CREDIT + " REAL" //nullable
+                + SUBJECT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + SUBJECT_NAME + " TEXT NOT NULL, "
+                + SUBJECT_CODE + " INTEGER NOT NULL, "
+                + SUBJECT_CREDIT + " REAL" //nullable
                 + ")";
 
         String CREATE_TAKEN_SUBJECT_TABLE = "CREATE TABLE " + TABLE_TAKEN_SUBJECT + "("
-                + COLUMN_TAKEN_SUBJECT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + COLUMN_STUDENT_ID_FK + " INTEGER NOT NULL, "
-                + COLUMN_SUBJECT_ID_FK + " INTEGER NOT NULL, "
-                + "FOREIGN KEY (" + COLUMN_STUDENT_ID_FK + ") REFERENCES " + TABLE_STUDENT + "(" + COLUMN_STUDENT_ID + ") ON UPDATE CASCADE ON DELETE CASCADE, "
-                + "FOREIGN KEY (" + COLUMN_SUBJECT_ID_FK + ") REFERENCES " + TABLE_SUBJECT + "(" + COLUMN_SUBJECT_ID + ") ON UPDATE CASCADE ON DELETE CASCADE, "
-                + "CONSTRAINT " + STUDENT_SUB_CONSTRAINT + " UNIQUE (" + COLUMN_STUDENT_ID_FK + "," + COLUMN_SUBJECT_ID_FK + ")"
+                + TAKEN_SUBJECT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + STUDENT_ID_FK + " INTEGER NOT NULL, "
+                + SUBJECT_ID_FK + " INTEGER NOT NULL, "
+                + "FOREIGN KEY (" + STUDENT_ID_FK + ") REFERENCES " + TABLE_STUDENT + "(" + STUDENT_ID + ") ON UPDATE CASCADE ON DELETE CASCADE, "
+                + "FOREIGN KEY (" + SUBJECT_ID_FK + ") REFERENCES " + TABLE_SUBJECT + "(" + SUBJECT_ID + ") ON UPDATE CASCADE ON DELETE CASCADE, "
+                + "CONSTRAINT " + STUDENT_SUB_CONSTRAINT + " UNIQUE (" + STUDENT_ID_FK + "," + SUBJECT_ID_FK + ")"
                 + ")";
 
         sqLiteDatabase.execSQL(CREATE_STUDENT_TABLE);

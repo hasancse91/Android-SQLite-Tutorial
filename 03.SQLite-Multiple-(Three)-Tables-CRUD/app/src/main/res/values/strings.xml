@@ -12,4 +12,5 @@
     <string name="student_count">Student Count: %d</string>
     <string name="subject_count">Subject Count: %d</string>
     <string name="taken_subject_count">Taken Subject Count: %d</string>
+    <string name="student_list">Student List</string>
 </resources>
