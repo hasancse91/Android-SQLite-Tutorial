@@ -1,16 +1,15 @@
 package com.hellohasan.sqlite_multiple_three_tables_crud.database;
 
-import android.widget.Toast;
-
+import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
 import com.hellohasan.sqlite_multiple_three_tables_crud.util.MyApp;
 
-public class StudentQueryImplementation implements Query.Student{
+public class StudentQueryQueryImplementation implements QueryContract.StudentQuery {
 
     private MyApp app = new MyApp();
 
 
     @Override
-    public void createStudent() {
+    public void createStudent(Student student) {
 
     }
 

@@ -1,13 +1,14 @@
 package com.hellohasan.sqlite_multiple_three_tables_crud.database;
 
+import com.hellohasan.sqlite_multiple_three_tables_crud.model.TakenSubject;
 import com.hellohasan.sqlite_multiple_three_tables_crud.util.MyApp;
 
-public class TakenSubjectQueryImplementation implements Query.TakenSubject {
+public class TakenSubjectQueryQueryImplementation implements QueryContract.TakenSubjectQuery {
 
     private MyApp app = new MyApp();
 
     @Override
-    public void createTakenSubject() {
+    public void createTakenSubject(TakenSubject takenSubject) {
 
     }
 
