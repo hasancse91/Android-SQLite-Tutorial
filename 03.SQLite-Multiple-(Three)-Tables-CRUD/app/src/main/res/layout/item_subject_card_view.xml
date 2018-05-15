@@ -43,6 +43,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/delete_button_description"
             app:srcCompat="@drawable/ic_delete_black_24dp"/>
 
         <ImageView
@@ -52,6 +53,7 @@
             app:srcCompat="@drawable/ic_edit_black_24dp"
             app:layout_constraintEnd_toStartOf="@id/deleteIcon"
             app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/edit_button_description"
             android:layout_marginRight="8dp"
             android:layout_marginEnd="8dp" />
 

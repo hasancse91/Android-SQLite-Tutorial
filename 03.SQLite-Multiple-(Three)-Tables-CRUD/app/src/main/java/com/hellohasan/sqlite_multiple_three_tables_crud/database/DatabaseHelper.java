@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.hellohasan.sqlite_multiple_three_tables_crud.util.MyApp;
+
 import static com.hellohasan.sqlite_multiple_three_tables_crud.util.Constants.*;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -13,13 +15,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static DatabaseHelper databaseHelper;
 
-    private DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    private DatabaseHelper() {
+        super(new MyApp().getApplicationContext(), DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public static DatabaseHelper getInstance(Context context) {
+    public static DatabaseHelper getInstance() {
+
         if (databaseHelper == null)
-            databaseHelper = new DatabaseHelper(context);
+            databaseHelper = new DatabaseHelper();
 
         return databaseHelper;
     }

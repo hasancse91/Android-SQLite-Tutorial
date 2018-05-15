@@ -1,12 +1,8 @@
 package com.hellohasan.sqlite_multiple_three_tables_crud.database;
 
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
-import com.hellohasan.sqlite_multiple_three_tables_crud.util.MyApp;
 
-public class StudentQueryQueryImplementation implements QueryContract.StudentQuery {
-
-    private MyApp app = new MyApp();
-
+public class StudentQueryImplementation implements QueryContract.StudentQuery {
 
     @Override
     public void createStudent(Student student) {
