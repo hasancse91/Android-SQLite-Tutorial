@@ -9,6 +9,11 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryContract;
+import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryResponse;
+import com.hellohasan.sqlite_multiple_three_tables_crud.database.StudentQueryImplementation;
+import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

@@ -1,6 +1,5 @@
 package com.hellohasan.sqlite_multiple_three_tables_crud.database;
 
-import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -20,7 +19,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public static DatabaseHelper getInstance() {
-
         if (databaseHelper == null)
             databaseHelper = new DatabaseHelper();
 
