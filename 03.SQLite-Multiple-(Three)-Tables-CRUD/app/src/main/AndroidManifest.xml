@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".features.student_crud.MainActivity"
             android:label="@string/student_list"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -21,9 +21,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SubjectsActivity"
+            android:name=".features.subject_crud.SubjectsActivity"
             android:label="@string/title_activity_subjects"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".features.taken_subject_crud.TakenSubjectActivity"></activity>
     </application>
 
 </manifest>

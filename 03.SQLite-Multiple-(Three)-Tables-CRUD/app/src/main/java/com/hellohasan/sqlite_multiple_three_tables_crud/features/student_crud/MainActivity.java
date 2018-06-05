@@ -1,4 +1,4 @@
-package com.hellohasan.sqlite_multiple_three_tables_crud;
+package com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,10 +9,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryContract;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryResponse;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.StudentQueryImplementation;
-import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
+import com.hellohasan.sqlite_multiple_three_tables_crud.R;
 
 public class MainActivity extends AppCompatActivity {
 
