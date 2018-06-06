@@ -1,22 +1,26 @@
-package com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud;
+package com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_show;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.hellohasan.sqlite_multiple_three_tables_crud.R;
+import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_create.StudentCreateDialogFragment;
+import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_create.StudentCrudListener;
+import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
+import com.hellohasan.sqlite_multiple_three_tables_crud.util.Constants;
 
-public class MainActivity extends AppCompatActivity {
+public class StudentListActivity extends AppCompatActivity implements StudentCrudListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_student_list);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -24,8 +28,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                openStudentCreateDialog();
             }
         });
     }
@@ -50,5 +53,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onStudentListUpdate(boolean isUpdated) {
+        Toast.makeText(this, "Student created", Toast.LENGTH_SHORT).show();
+    }
+
+    private void openStudentCreateDialog() {
+        StudentCreateDialogFragment studentCreateDialogFragment = StudentCreateDialogFragment.newInstance("Create Student", this);
+        studentCreateDialogFragment.show(getSupportFragmentManager(), Constants.CREATE_STUDENT);
     }
 }

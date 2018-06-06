@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/activity_background"
-    tools:context="com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.MainActivity">
+    tools:context="com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_show.StudentListActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

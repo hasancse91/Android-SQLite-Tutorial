@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".features.student_crud.MainActivity"
+            android:name=".features.student_crud.student_show.StudentListActivity"
             android:label="@string/student_list"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

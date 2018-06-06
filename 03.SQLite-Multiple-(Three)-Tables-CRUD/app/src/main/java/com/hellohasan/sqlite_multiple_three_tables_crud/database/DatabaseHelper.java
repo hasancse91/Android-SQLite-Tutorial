@@ -15,7 +15,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static DatabaseHelper databaseHelper;
 
     private DatabaseHelper() {
-        super(new MyApp().getApplicationContext(), DATABASE_NAME, null, DATABASE_VERSION);
+        super(MyApp.context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     public static DatabaseHelper getInstance() {
