@@ -57,7 +57,7 @@ public class StudentListActivity extends AppCompatActivity implements StudentCre
 
         viewVisibility();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,8 +71,6 @@ public class StudentListActivity extends AppCompatActivity implements StudentCre
         super.onResume();
         printSummary();
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
