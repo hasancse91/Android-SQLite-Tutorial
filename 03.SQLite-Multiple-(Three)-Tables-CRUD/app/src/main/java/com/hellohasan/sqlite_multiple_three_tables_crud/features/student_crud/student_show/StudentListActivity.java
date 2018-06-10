@@ -7,15 +7,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.hellohasan.sqlite_multiple_three_tables_crud.R;
-import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_create.StudentCreateDialogFragment;
-import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_create.StudentCrudListener;
-import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
+import com.hellohasan.sqlite_multiple_three_tables_crud.database.*;
+import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_create.*;
+import com.hellohasan.sqlite_multiple_three_tables_crud.model.TableRowCount;
 import com.hellohasan.sqlite_multiple_three_tables_crud.util.Constants;
 
 public class StudentListActivity extends AppCompatActivity implements StudentCrudListener {
+
+    private TextView studentCountTextView;
+    private TextView subjectCountTextView;
+    private TextView takenSubjectCountTextView;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +28,16 @@ public class StudentListActivity extends AppCompatActivity implements StudentCru
         setContentView(R.layout.activity_student_list);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        initialization();
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        showStudentList();
+        showTableRowCount();
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openStudentCreateDialog();
+                StudentCreateDialogFragment studentCreateDialogFragment = StudentCreateDialogFragment.newInstance("Create Student", StudentListActivity.this);
+                studentCreateDialogFragment.show(getSupportFragmentManager(), Constants.CREATE_STUDENT);
             }
         });
     }
@@ -42,26 +51,46 @@ public class StudentListActivity extends AppCompatActivity implements StudentCru
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_add_subject) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        return id == R.id.action_add_subject || super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onStudentListUpdate(boolean isUpdated) {
-        Toast.makeText(this, "Student created", Toast.LENGTH_SHORT).show();
+        if(isUpdated) {
+            showStudentList();
+            showTableRowCount();
+        }
     }
 
-    private void openStudentCreateDialog() {
-        StudentCreateDialogFragment studentCreateDialogFragment = StudentCreateDialogFragment.newInstance("Create Student", this);
-        studentCreateDialogFragment.show(getSupportFragmentManager(), Constants.CREATE_STUDENT);
+    private void showStudentList() {
+
+    }
+
+    private void showTableRowCount() {
+        QueryContract.TableRowCountQuery query = new TableRowCountQueryImplementation();
+        query.getTableRowCount(new QueryResponse<TableRowCount>() {
+            @Override
+            public void onSuccess(TableRowCount data) {
+                studentCountTextView.setText(getString(R.string.student_count, data.getStudentRow()));
+                subjectCountTextView.setText(getString(R.string.subject_count, data.getSubjectRow()));
+                takenSubjectCountTextView.setText(getString(R.string.taken_subject_count, data.getTakenSubjectRow()));
+            }
+
+            @Override
+            public void onFailure(String message) {
+                studentCountTextView.setText(getString(R.string.table_row_count_failed));
+                subjectCountTextView.setText(message);
+                takenSubjectCountTextView.setText("");
+            }
+        });
+    }
+
+    private void initialization(){
+        studentCountTextView = findViewById(R.id.studentCount);
+        subjectCountTextView = findViewById(R.id.subjectCount);
+        takenSubjectCountTextView = findViewById(R.id.takenSubjectCount);
+
+        fab = findViewById(R.id.fab);
     }
 }

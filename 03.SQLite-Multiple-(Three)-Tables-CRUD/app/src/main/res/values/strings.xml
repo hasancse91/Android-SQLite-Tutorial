@@ -5,9 +5,9 @@
     <string name="course_credit">Course Credit: %f</string>
     <string name="title_activity_subjects">Subject List</string>
     <string name="no_data_found">No data found in list!</string>
-    <string name="student_count">Student Count: %d</string>
-    <string name="subject_count">Subject Count: %d</string>
-    <string name="taken_subject_count">Taken Subject Count: %d</string>
+    <string name="student_count">Number of Student: %d</string>
+    <string name="subject_count">Number of Subject: %d</string>
+    <string name="taken_subject_count">Number of Taken Subject: %d</string>
     <string name="delete_button_description">This icon is responsible for delete the resource</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_create_subject">CreateSubjectActivity</string>
@@ -33,4 +33,5 @@
     <string name="student_list">Student List</string>
     <string name="database_summary">Total Student: %1$d. Total Subject: %2$d</string>
     <string name="update_button">Update</string>
+    <string name="table_row_count_failed">Table row count failed</string>
 </resources>

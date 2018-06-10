@@ -80,6 +80,7 @@ public class StudentCreateDialogFragment extends DialogFragment {
                 studentQuery.createStudent(student, new QueryResponse<Boolean>() {
                     @Override
                     public void onSuccess(Boolean data) {
+                        getDialog().dismiss();
                         studentCrudListener.onStudentListUpdate(data);
                         Toast.makeText(getContext(), "Student created successfully", Toast.LENGTH_LONG).show();
                     }
@@ -91,14 +92,13 @@ public class StudentCreateDialogFragment extends DialogFragment {
                     }
                 });
 
-                getDialog().dismiss();
             }
         });
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                getDialog().dismiss();
+                getDialog().dismiss();
             }
         });
 
