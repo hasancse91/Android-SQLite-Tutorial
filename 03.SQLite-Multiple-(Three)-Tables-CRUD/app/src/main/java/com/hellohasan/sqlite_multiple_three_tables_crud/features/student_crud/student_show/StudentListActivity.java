@@ -3,6 +3,8 @@ package com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.s
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
@@ -12,15 +14,24 @@ import android.widget.TextView;
 import com.hellohasan.sqlite_multiple_three_tables_crud.R;
 import com.hellohasan.sqlite_multiple_three_tables_crud.database.*;
 import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_create.*;
+import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.TableRowCount;
 import com.hellohasan.sqlite_multiple_three_tables_crud.util.Constants;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StudentListActivity extends AppCompatActivity implements StudentCrudListener {
 
+    private RecyclerView recyclerView;
+    private FloatingActionButton fab;
     private TextView studentCountTextView;
     private TextView subjectCountTextView;
     private TextView takenSubjectCountTextView;
-    private FloatingActionButton fab;
+
+    private List<Student> studentList = new ArrayList<>();
+    private StudentListAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +40,10 @@ public class StudentListActivity extends AppCompatActivity implements StudentCru
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         initialization();
+
+        adapter = new StudentListAdapter(this, studentList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setAdapter(adapter);
 
         showStudentList();
         showTableRowCount();
@@ -64,7 +79,20 @@ public class StudentListActivity extends AppCompatActivity implements StudentCru
     }
 
     private void showStudentList() {
+        QueryContract.StudentQuery query = new StudentQueryImplementation();
+        query.readAllStudent(new QueryResponse<List<Student>>() {
+            @Override
+            public void onSuccess(List<Student> data) {
+                studentList.clear();
+                studentList.addAll(data);
+                adapter.notifyDataSetChanged();
+            }
 
+            @Override
+            public void onFailure(String message) {
+
+            }
+        });
     }
 
     private void showTableRowCount() {
@@ -87,10 +115,11 @@ public class StudentListActivity extends AppCompatActivity implements StudentCru
     }
 
     private void initialization(){
+        recyclerView = findViewById(R.id.recyclerView);
+        fab = findViewById(R.id.fab);
+
         studentCountTextView = findViewById(R.id.studentCount);
         subjectCountTextView = findViewById(R.id.subjectCount);
         takenSubjectCountTextView = findViewById(R.id.takenSubjectCount);
-
-        fab = findViewById(R.id.fab);
     }
 }
