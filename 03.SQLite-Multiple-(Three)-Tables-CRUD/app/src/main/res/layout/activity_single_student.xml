@@ -4,6 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".features.student_crud.student_show.SingleStudentActivity">
+
+    <include
+        android:id="@+id/studentInfoLayout"
+        layout="@layout/layout_student_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/titleLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="@string/taken_subject_by_student"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/studentInfoLayout" />
+
+    <ImageView
+        android:id="@+id/action_add_subject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="@id/titleLabel"
+        app:layout_constraintEnd_toEndOf="@id/titleLabel"
+        app:layout_constraintTop_toTopOf="@id/titleLabel"
+        app:srcCompat="@drawable/ic_add_subject_24dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleLabel"
+        tools:listitem="@layout/item_subject_card_view">
+
+    </android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>

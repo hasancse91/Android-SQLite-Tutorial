@@ -34,4 +34,6 @@
     <string name="database_summary">Total Student: %1$d. Total Subject: %2$d</string>
     <string name="update_button">Update</string>
     <string name="table_row_count_failed">Table row count failed</string>
+    <string name="taken_subject_by_student">Taken Subjects by Student</string>
+    <string name="student_and_taken_subject"><![CDATA[Student Info & Taken Subject]]></string>
 </resources>

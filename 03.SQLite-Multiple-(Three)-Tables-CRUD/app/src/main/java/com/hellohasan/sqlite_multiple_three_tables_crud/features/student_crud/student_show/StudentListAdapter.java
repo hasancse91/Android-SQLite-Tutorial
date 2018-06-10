@@ -59,7 +59,7 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentViewHolder> 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, SingleStudentActivity.class);
-                intent.putExtra(STUDENT_REGISTRATION_NUM, student.getRegistrationNumber());
+                intent.putExtra(STUDENT_ID, student.getId());
                 context.startActivity(intent);
             }
         });
