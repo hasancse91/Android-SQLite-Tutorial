@@ -1,5 +1,6 @@
-package com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_show;
+package com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_list_show;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.hellohasan.sqlite_multiple_three_tables_crud.R;
 import com.hellohasan.sqlite_multiple_three_tables_crud.database.*;
 import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_create.*;
+import com.hellohasan.sqlite_multiple_three_tables_crud.features.subject_crud.subject_list_show.SubjectListActivity;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.TableRowCount;
 import com.hellohasan.sqlite_multiple_three_tables_crud.util.Constants;
@@ -46,7 +48,6 @@ public class StudentListActivity extends AppCompatActivity implements StudentCru
         recyclerView.setAdapter(adapter);
 
         showStudentList();
-        showTableRowCount();
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +56,12 @@ public class StudentListActivity extends AppCompatActivity implements StudentCru
                 studentCreateDialogFragment.show(getSupportFragmentManager(), Constants.CREATE_STUDENT);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showTableRowCount();
     }
 
     @Override
@@ -67,14 +74,17 @@ public class StudentListActivity extends AppCompatActivity implements StudentCru
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        return id == R.id.action_add_subject || super.onOptionsItemSelected(item);
+        if(id == R.id.action_show_subject){
+            startActivity(new Intent(this, SubjectListActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onStudentListUpdate(boolean isUpdated) {
         if(isUpdated) {
             showStudentList();
-            showTableRowCount();
+
         }
     }
 

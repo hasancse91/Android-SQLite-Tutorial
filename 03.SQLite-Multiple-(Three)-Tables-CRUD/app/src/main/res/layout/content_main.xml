@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_show.StudentListActivity"
+    tools:context="com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_list_show.StudentListActivity"
     tools:showIn="@layout/activity_student_list">
 
     <android.support.v7.widget.RecyclerView

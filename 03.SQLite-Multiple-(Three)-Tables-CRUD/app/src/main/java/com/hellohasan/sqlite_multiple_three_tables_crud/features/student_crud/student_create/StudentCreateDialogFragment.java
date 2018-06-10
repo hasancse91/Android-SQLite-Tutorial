@@ -15,7 +15,8 @@ import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryContract;
 import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryResponse;
 import com.hellohasan.sqlite_multiple_three_tables_crud.database.StudentQueryImplementation;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
-import com.hellohasan.sqlite_multiple_three_tables_crud.util.Constants;
+
+import static com.hellohasan.sqlite_multiple_three_tables_crud.util.Constants.*;
 
 
 public class StudentCreateDialogFragment extends DialogFragment {
@@ -63,7 +64,7 @@ public class StudentCreateDialogFragment extends DialogFragment {
         createButton = view.findViewById(R.id.createButton);
         cancelButton = view.findViewById(R.id.cancelButton);
 
-        String title = getArguments().getString(Constants.TITLE);
+        String title = getArguments().getString(TITLE);
         getDialog().setTitle(title);
 
         createButton.setOnClickListener(new View.OnClickListener() {

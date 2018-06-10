@@ -18,7 +18,7 @@ public class QueryContract {
     }
 
     public interface SubjectQuery {
-        void createSubject(Subject subject, QueryResponse<Integer> response);
+        void createSubject(Subject subject, QueryResponse<Boolean> response);
         void readSubject(int subjectId, QueryResponse<Subject> response);
         void readAllSubject(QueryResponse<List<Subject>> response);
         void updateSubject(Subject subject, QueryResponse<Boolean> response);

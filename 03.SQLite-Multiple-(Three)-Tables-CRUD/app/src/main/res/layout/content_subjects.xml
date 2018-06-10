@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".features.subject_crud.SubjectsActivity"
-    tools:showIn="@layout/activity_subjects">
+    tools:context=".features.subject_crud.subject_list_show.SubjectListActivity"
+    tools:showIn="@layout/activity_subject_list">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
