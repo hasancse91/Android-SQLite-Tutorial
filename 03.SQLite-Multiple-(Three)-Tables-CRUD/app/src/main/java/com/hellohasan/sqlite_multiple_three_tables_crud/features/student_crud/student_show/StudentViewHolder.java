@@ -16,7 +16,7 @@ class StudentViewHolder extends RecyclerView.ViewHolder {
     ImageView editImageView;
     ImageView deleteImageView;
 
-    public StudentViewHolder(View itemView) {
+    StudentViewHolder(View itemView) {
         super(itemView);
 
         nameTextView = itemView.findViewById(R.id.nameTextView);

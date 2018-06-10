@@ -1,6 +1,7 @@
 package com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_show;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,12 +13,14 @@ import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
 
 import java.util.List;
 
+import static com.hellohasan.sqlite_multiple_three_tables_crud.util.Constants.*;
+
 public class StudentListAdapter extends RecyclerView.Adapter<StudentViewHolder> {
 
     private Context context;
     private List<Student> studentList;
 
-    public StudentListAdapter(Context context, List<Student> studentList) {
+    StudentListAdapter(Context context, List<Student> studentList) {
         this.context = context;
         this.studentList = studentList;
     }
@@ -55,7 +58,9 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentViewHolder> 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context, SingleStudentActivity.class);
+                intent.putExtra(STUDENT_REGISTRATION_NUM, student.getRegistrationNumber());
+                context.startActivity(intent);
             }
         });
     }
