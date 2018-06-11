@@ -2,29 +2,34 @@ package com.hellohasan.sqlite_multiple_three_tables_crud.features.subject_crud.s
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
 import com.hellohasan.sqlite_multiple_three_tables_crud.R;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryContract;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryResponse;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.TableRowCountQueryImplementation;
-import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_create.StudentCreateDialogFragment;
-import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_list_show.StudentListActivity;
-import com.hellohasan.sqlite_multiple_three_tables_crud.features.subject_crud.subject_create.SubjectCreateDialogFragment;
-import com.hellohasan.sqlite_multiple_three_tables_crud.features.subject_crud.subject_create.SubjectCrudListener;
-import com.hellohasan.sqlite_multiple_three_tables_crud.model.TableRowCount;
-import com.hellohasan.sqlite_multiple_three_tables_crud.util.Constants;
+import com.hellohasan.sqlite_multiple_three_tables_crud.database.*;
+import com.hellohasan.sqlite_multiple_three_tables_crud.features.subject_crud.subject_create.*;
+import com.hellohasan.sqlite_multiple_three_tables_crud.model.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.hellohasan.sqlite_multiple_three_tables_crud.util.Constants.*;
 
 public class SubjectListActivity extends AppCompatActivity implements SubjectCrudListener {
 
+    private RecyclerView recyclerView;
+    private TextView noDataFoundTextView;
     private TextView studentCountTextView;
     private TextView subjectCountTextView;
     private TextView takenSubjectCountTextView;
     private FloatingActionButton fab;
+
+    private List<Subject> subjectList = new ArrayList<>();
+    private SubjectListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +41,18 @@ public class SubjectListActivity extends AppCompatActivity implements SubjectCru
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         initialization();
 
+        adapter = new SubjectListAdapter(this, subjectList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setAdapter(adapter);
+
         showTableRowCount();
+        showSubjectList();
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SubjectCreateDialogFragment dialogFragment = SubjectCreateDialogFragment.newInstance("Create Subject", SubjectListActivity.this);
-                dialogFragment.show(getSupportFragmentManager(), Constants.CREATE_STUDENT);
+                dialogFragment.show(getSupportFragmentManager(), CREATE_STUDENT);
 
             }
         });
@@ -51,8 +61,8 @@ public class SubjectListActivity extends AppCompatActivity implements SubjectCru
     @Override
     public void onSubjectListUpdate(boolean isUpdate) {
         if(isUpdate) {
-
             showTableRowCount();
+            showSubjectList();
         }
     }
 
@@ -81,13 +91,36 @@ public class SubjectListActivity extends AppCompatActivity implements SubjectCru
         });
     }
 
+    private void showSubjectList(){
+        QueryContract.SubjectQuery query = new SubjectQueryImplementation();
+        query.readAllSubject(new QueryResponse<List<Subject>>() {
+            @Override
+            public void onSuccess(List<Subject> data) {
+                recyclerView.setVisibility(View.VISIBLE);
+                noDataFoundTextView.setVisibility(View.GONE);
+
+                subjectList.clear();
+                subjectList.addAll(data);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(String message) {
+                recyclerView.setVisibility(View.GONE);
+                noDataFoundTextView.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
     private void initialization(){
+        recyclerView = findViewById(R.id.recyclerView);
+        noDataFoundTextView = findViewById(R.id.noDataFoundTextView);
+
         studentCountTextView = findViewById(R.id.studentCount);
         subjectCountTextView = findViewById(R.id.subjectCount);
         takenSubjectCountTextView = findViewById(R.id.takenSubjectCount);
 
         fab = findViewById(R.id.fab);
     }
-
 
 }

@@ -2,9 +2,9 @@
     <string name="app_name">SQLite Three Tables CRUD</string>
     <string name="action_add_subject">Add Subject</string>
     <string name="course_code">Course Code: %d</string>
-    <string name="course_credit">Course Credit: %f</string>
+    <string name="course_credit">Course Credit: %.2f</string>
     <string name="title_activity_subjects">Subject List</string>
-    <string name="no_data_found">No data found in list!</string>
+    <string name="no_data_found">No data found in database!</string>
     <string name="student_count">Number of Student: %d</string>
     <string name="subject_count">Number of Subject: %d</string>
     <string name="taken_subject_count">Number of Taken Subject: %d</string>
