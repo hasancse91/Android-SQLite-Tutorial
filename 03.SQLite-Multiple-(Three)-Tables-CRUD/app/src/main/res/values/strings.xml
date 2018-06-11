@@ -36,4 +36,8 @@
     <string name="table_row_count_failed">Table row count failed</string>
     <string name="taken_subject_by_student">Taken Subjects by Student</string>
     <string name="student_and_taken_subject"><![CDATA[Student Info & Taken Subject]]></string>
+    <string name="no_subject">This student haven\'t taken any subject</string>
+    <string name="subject_assign">Subject Assign to Student</string>
+    <string name="close">Close</string>
+    <string name="no_subject_so_add_now">No subject is found in database. Please add subject from Home page\'s menu</string>
 </resources>

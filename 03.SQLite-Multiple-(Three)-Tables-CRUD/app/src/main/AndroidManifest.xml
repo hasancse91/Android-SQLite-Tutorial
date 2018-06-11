@@ -13,8 +13,8 @@
         <activity
             android:name=".features.student_crud.student_list_show.StudentListActivity"
             android:label="@string/student_list"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,13 +24,15 @@
         <activity
             android:name=".features.subject_crud.subject_list_show.SubjectListActivity"
             android:label="@string/title_activity_subjects"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".features.taken_subject_crud.TakenSubjectActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".features.student_crud.student_list_show.SingleStudentActivity"
             android:screenOrientation="portrait"
-            android:label="@string/student_and_taken_subject"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".features.taken_subject_crud.taken_subject_show.StudentTakenSubjectActivity"
+            android:label="@string/student_and_taken_subject"
+            android:screenOrientation="portrait" />
+        <activity android:name=".features.taken_subject_crud.subject_assign.SubjectAssignActivity"
+            android:label="@string/subject_assign"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"/>
     </application>
 
 </manifest>

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".features.student_crud.student_list_show.SingleStudentActivity">
+    android:padding="8dp"
+    tools:context=".features.taken_subject_crud.taken_subject_show.StudentTakenSubjectActivity">
 
     <include
         android:id="@+id/studentInfoLayout"
@@ -39,15 +39,35 @@
         app:srcCompat="@drawable/ic_add_subject_24dp" />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rowCountLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleLabel"
-        tools:listitem="@layout/item_subject_card_view">
+        tools:listitem="@layout/item_taken_subject">
 
     </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/noDataFoundTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_subject"
+        app:layout_constraintBottom_toTopOf="@id/rowCountLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleLabel" />
+
+    <include
+        android:id="@+id/rowCountLayout"
+        layout="@layout/layout_table_row_count"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

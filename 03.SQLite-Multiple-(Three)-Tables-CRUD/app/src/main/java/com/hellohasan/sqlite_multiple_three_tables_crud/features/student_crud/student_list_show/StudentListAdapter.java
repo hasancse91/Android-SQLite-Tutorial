@@ -14,10 +14,9 @@ import android.widget.Toast;
 import com.hellohasan.sqlite_multiple_three_tables_crud.R;
 import com.hellohasan.sqlite_multiple_three_tables_crud.database.*;
 import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.StudentCrudListener;
-import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_create.StudentCreateDialogFragment;
 import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_update.StudentUpdateDialogFragment;
+import com.hellohasan.sqlite_multiple_three_tables_crud.features.taken_subject_crud.taken_subject_show.StudentTakenSubjectActivity;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
-import com.hellohasan.sqlite_multiple_three_tables_crud.util.Constants;
 
 import java.util.List;
 
@@ -74,7 +73,7 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentViewHolder> 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, SingleStudentActivity.class);
+                Intent intent = new Intent(context, StudentTakenSubjectActivity.class);
                 intent.putExtra(STUDENT_ID, student.getId());
                 context.startActivity(intent);
             }

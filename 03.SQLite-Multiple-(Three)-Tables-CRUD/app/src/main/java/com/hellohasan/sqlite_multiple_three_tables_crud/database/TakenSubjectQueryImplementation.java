@@ -1,5 +1,6 @@
 package com.hellohasan.sqlite_multiple_three_tables_crud.database;
 
+import com.hellohasan.sqlite_multiple_three_tables_crud.model.Subject;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.TakenSubject;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class TakenSubjectQueryImplementation implements QueryContract.TakenSubje
     }
 
     @Override
-    public void readAllTakenSubjectByStudentId(int studentId, QueryResponse<List<TakenSubject>> response) {
+    public void readAllTakenSubjectByStudentId(int studentId, QueryResponse<List<Subject>> response) {
 
     }
 
