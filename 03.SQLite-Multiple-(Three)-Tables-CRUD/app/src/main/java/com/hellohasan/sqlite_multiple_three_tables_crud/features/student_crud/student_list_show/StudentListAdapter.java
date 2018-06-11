@@ -12,11 +12,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.hellohasan.sqlite_multiple_three_tables_crud.R;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryContract;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryResponse;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.StudentQueryImplementation;
-import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_create.StudentCrudListener;
+import com.hellohasan.sqlite_multiple_three_tables_crud.database.*;
+import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.StudentCrudListener;
+import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_create.StudentCreateDialogFragment;
+import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_update.StudentUpdateDialogFragment;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
+import com.hellohasan.sqlite_multiple_three_tables_crud.util.Constants;
 
 import java.util.List;
 
@@ -53,7 +54,13 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentViewHolder> 
         holder.editImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                StudentUpdateDialogFragment studentCreateDialogFragment = StudentUpdateDialogFragment.newInstance(student, "Update Student", new StudentCrudListener() {
+                    @Override
+                    public void onStudentListUpdate(boolean inUpdated) {
+                        listener.onStudentListUpdate(inUpdated);
+                    }
+                });
+                studentCreateDialogFragment.show(((StudentListActivity) context).getSupportFragmentManager(), Constants.CREATE_STUDENT);
             }
         });
 

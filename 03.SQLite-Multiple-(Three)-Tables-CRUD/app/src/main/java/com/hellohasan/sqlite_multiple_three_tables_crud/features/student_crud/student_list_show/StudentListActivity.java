@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.hellohasan.sqlite_multiple_three_tables_crud.R;
 import com.hellohasan.sqlite_multiple_three_tables_crud.database.*;
 import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_create.StudentCreateDialogFragment;
-import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_create.StudentCrudListener;
+import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.StudentCrudListener;
 import com.hellohasan.sqlite_multiple_three_tables_crud.features.subject_crud.subject_list_show.SubjectListActivity;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.TableRowCount;

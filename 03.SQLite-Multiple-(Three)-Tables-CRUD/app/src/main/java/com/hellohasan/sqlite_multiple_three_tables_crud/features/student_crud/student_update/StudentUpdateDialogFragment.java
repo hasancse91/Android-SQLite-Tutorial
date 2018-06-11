@@ -1,4 +1,4 @@
-package com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_create;
+package com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_update;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -11,16 +11,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.hellohasan.sqlite_multiple_three_tables_crud.R;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryContract;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryResponse;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.StudentQueryImplementation;
+import com.hellohasan.sqlite_multiple_three_tables_crud.database.*;
 import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.StudentCrudListener;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
 
-import static com.hellohasan.sqlite_multiple_three_tables_crud.util.Constants.*;
+import static com.hellohasan.sqlite_multiple_three_tables_crud.util.Constants.TITLE;
 
-
-public class StudentCreateDialogFragment extends DialogFragment {
+public class StudentUpdateDialogFragment extends DialogFragment {
 
     private static StudentCrudListener studentCrudListener;
 
@@ -28,7 +25,7 @@ public class StudentCreateDialogFragment extends DialogFragment {
     private EditText registrationEditText;
     private EditText phoneEditText;
     private EditText emailEditText;
-    private Button createButton;
+    private Button updateButton;
     private Button cancelButton;
 
     private String nameString = "";
@@ -36,39 +33,45 @@ public class StudentCreateDialogFragment extends DialogFragment {
     private String phoneString = "";
     private String emailString = "";
 
-    public StudentCreateDialogFragment() {
+    private static Student student;
+
+    public StudentUpdateDialogFragment() {
         // Required empty public constructor
     }
 
-    public static StudentCreateDialogFragment newInstance(String title, StudentCrudListener listener){
+    public static StudentUpdateDialogFragment newInstance(Student std, String title, StudentCrudListener listener){
+        student = std;
         studentCrudListener = listener;
-        StudentCreateDialogFragment studentCreateDialogFragment = new StudentCreateDialogFragment();
+        StudentUpdateDialogFragment studentUpdateDialogFragment = new StudentUpdateDialogFragment();
         Bundle args = new Bundle();
         args.putString("title", title);
-        studentCreateDialogFragment.setArguments(args);
+        studentUpdateDialogFragment.setArguments(args);
 
-        studentCreateDialogFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
+        studentUpdateDialogFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
 
-        return studentCreateDialogFragment;
+        return studentUpdateDialogFragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_student_create_dialog, container, false);
+        View view = inflater.inflate(R.layout.fragment_student_update_dialog, container, false);
+        String title = getArguments().getString(TITLE);
+        getDialog().setTitle(title);
 
         nameEditText = view.findViewById(R.id.studentNameEditText);
         registrationEditText = view.findViewById(R.id.registrationEditText);
         phoneEditText = view.findViewById(R.id.phoneEditText);
         emailEditText = view.findViewById(R.id.emailEditText);
-        createButton = view.findViewById(R.id.createButton);
+        updateButton = view.findViewById(R.id.updateButton);
         cancelButton = view.findViewById(R.id.cancelButton);
 
-        String title = getArguments().getString(TITLE);
-        getDialog().setTitle(title);
+        nameEditText.setText(student.getName());
+        registrationEditText.setText(String.valueOf(student.getRegistrationNumber()));
+        phoneEditText.setText(student.getPhone());
+        emailEditText.setText(student.getEmail());
 
-        createButton.setOnClickListener(new View.OnClickListener() {
+        updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 nameString = nameEditText.getText().toString();
@@ -76,15 +79,18 @@ public class StudentCreateDialogFragment extends DialogFragment {
                 phoneString = phoneEditText.getText().toString();
                 emailString = emailEditText.getText().toString();
 
-                final Student student = new Student(-1, nameString, registrationNumber, phoneString, emailString);
+                student.setName(nameString);
+                student.setRegistrationNumber(registrationNumber);
+                student.setPhone(phoneString);
+                student.setEmail(emailString);
 
                 QueryContract.StudentQuery studentQuery = new StudentQueryImplementation();
-                studentQuery.createStudent(student, new QueryResponse<Boolean>() {
+                studentQuery.updateStudent(student, new QueryResponse<Boolean>() {
                     @Override
                     public void onSuccess(Boolean data) {
                         getDialog().dismiss();
                         studentCrudListener.onStudentListUpdate(data);
-                        Toast.makeText(getContext(), "Student created successfully", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Student updated successfully", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
