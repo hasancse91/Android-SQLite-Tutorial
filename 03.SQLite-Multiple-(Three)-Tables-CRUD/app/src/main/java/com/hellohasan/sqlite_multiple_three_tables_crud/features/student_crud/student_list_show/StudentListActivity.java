@@ -84,7 +84,7 @@ public class StudentListActivity extends AppCompatActivity implements StudentCru
     public void onStudentListUpdate(boolean isUpdated) {
         if(isUpdated) {
             showStudentList();
-
+            showTableRowCount();
         }
     }
 
