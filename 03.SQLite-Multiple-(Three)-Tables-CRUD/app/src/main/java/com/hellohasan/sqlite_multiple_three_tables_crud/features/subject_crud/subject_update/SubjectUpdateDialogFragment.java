@@ -1,9 +1,8 @@
-package com.hellohasan.sqlite_multiple_three_tables_crud.features.subject_crud.subject_create;
+package com.hellohasan.sqlite_multiple_three_tables_crud.features.subject_crud.subject_update;
 
 import android.app.Dialog;
-import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,66 +13,79 @@ import android.widget.Toast;
 import com.hellohasan.sqlite_multiple_three_tables_crud.R;
 import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryContract;
 import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryResponse;
+import com.hellohasan.sqlite_multiple_three_tables_crud.database.StudentQueryImplementation;
 import com.hellohasan.sqlite_multiple_three_tables_crud.database.SubjectQueryImplementation;
+import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.StudentCrudListener;
 import com.hellohasan.sqlite_multiple_three_tables_crud.features.subject_crud.SubjectCrudListener;
+import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.Subject;
-import com.hellohasan.sqlite_multiple_three_tables_crud.util.Constants;
 
-public class SubjectCreateDialogFragment extends DialogFragment {
+import static com.hellohasan.sqlite_multiple_three_tables_crud.util.Constants.TITLE;
+
+public class SubjectUpdateDialogFragment extends DialogFragment {
+
+    private static SubjectCrudListener subjectCrudListener;
 
     private EditText subjectNameEditText;
     private EditText subjectCodeEditText;
     private EditText subjectCreditEditText;
-    private Button createButton;
+    private Button updateButton;
     private Button cancelButton;
 
-    private static SubjectCrudListener subjectCrudListener;
+    private static Subject subject;
 
-    public SubjectCreateDialogFragment() {
+    public SubjectUpdateDialogFragment() {
+        // Required empty public constructor
     }
 
-    public static SubjectCreateDialogFragment newInstance(String title, SubjectCrudListener listener){
+    public static SubjectUpdateDialogFragment newInstance(Subject sub, String title, SubjectCrudListener listener){
+        subject = sub;
         subjectCrudListener = listener;
-        SubjectCreateDialogFragment subjectCreateDialogFragment = new SubjectCreateDialogFragment();
+        SubjectUpdateDialogFragment subjectUpdateDialogFragment = new SubjectUpdateDialogFragment();
         Bundle args = new Bundle();
         args.putString("title", title);
-        subjectCreateDialogFragment.setArguments(args);
+        subjectUpdateDialogFragment.setArguments(args);
 
-        subjectCreateDialogFragment.setStyle(android.support.v4.app.DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
+        subjectUpdateDialogFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
 
-        return subjectCreateDialogFragment;
+        return subjectUpdateDialogFragment;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_subject_create_dialog, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_subject_update_dialog, container, false);
+        String title = getArguments().getString(TITLE);
+        getDialog().setTitle(title);
 
         subjectNameEditText = view.findViewById(R.id.subjectNameEditText);
         subjectCodeEditText = view.findViewById(R.id.subjectCodeEditText);
         subjectCreditEditText = view.findViewById(R.id.subjectCreditEditText);
-        createButton = view.findViewById(R.id.createButton);
+        updateButton = view.findViewById(R.id.updateButton);
         cancelButton = view.findViewById(R.id.cancelButton);
 
-        String title = getArguments().getString(Constants.TITLE);
-        getDialog().setTitle(title);
+        subjectNameEditText.setText(subject.getName());
+        subjectCodeEditText.setText(String.valueOf(subject.getCode()));
+        subjectCreditEditText.setText(String.valueOf(subject.getCredit()));
 
-        createButton.setOnClickListener(new View.OnClickListener() {
+        updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String subjectName = subjectNameEditText.getText().toString();
                 int subjectCode = Integer.parseInt(subjectCodeEditText.getText().toString());
                 double subjectCredit = Double.parseDouble(subjectCreditEditText.getText().toString());
 
-                final Subject subject = new Subject(-1, subjectName, subjectCode, subjectCredit);
+                subject.setName(subjectName);
+                subject.setCode(subjectCode);
+                subject.setCredit(subjectCredit);
 
-                QueryContract.SubjectQuery query = new SubjectQueryImplementation();
-                query.createSubject(subject, new QueryResponse<Boolean>() {
+                QueryContract.SubjectQuery subjectQuery = new SubjectQueryImplementation();
+                subjectQuery.updateSubject(subject, new QueryResponse<Boolean>() {
                     @Override
                     public void onSuccess(Boolean data) {
                         getDialog().dismiss();
-                        subjectCrudListener.onSubjectListUpdate(true);
-                        Toast.makeText(getContext(), "Subject created successfully", Toast.LENGTH_LONG).show();
+                        subjectCrudListener.onSubjectListUpdate(data);
+                        Toast.makeText(getContext(), "Subject updated successfully", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -107,4 +119,5 @@ public class SubjectCreateDialogFragment extends DialogFragment {
             dialog.getWindow().setLayout(width, height);
         }
     }
+
 }

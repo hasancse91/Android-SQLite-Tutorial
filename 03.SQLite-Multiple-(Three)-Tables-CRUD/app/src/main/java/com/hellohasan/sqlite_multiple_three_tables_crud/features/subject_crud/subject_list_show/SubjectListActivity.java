@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.hellohasan.sqlite_multiple_three_tables_crud.R;
 import com.hellohasan.sqlite_multiple_three_tables_crud.database.*;
+import com.hellohasan.sqlite_multiple_three_tables_crud.features.subject_crud.SubjectCrudListener;
 import com.hellohasan.sqlite_multiple_three_tables_crud.features.subject_crud.subject_create.*;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.*;
 
@@ -41,7 +42,7 @@ public class SubjectListActivity extends AppCompatActivity implements SubjectCru
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         initialization();
 
-        adapter = new SubjectListAdapter(this, subjectList);
+        adapter = new SubjectListAdapter(this, subjectList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
@@ -52,7 +53,7 @@ public class SubjectListActivity extends AppCompatActivity implements SubjectCru
             @Override
             public void onClick(View view) {
                 SubjectCreateDialogFragment dialogFragment = SubjectCreateDialogFragment.newInstance("Create Subject", SubjectListActivity.this);
-                dialogFragment.show(getSupportFragmentManager(), CREATE_STUDENT);
+                dialogFragment.show(getSupportFragmentManager(), CREATE_SUBJECT);
 
             }
         });

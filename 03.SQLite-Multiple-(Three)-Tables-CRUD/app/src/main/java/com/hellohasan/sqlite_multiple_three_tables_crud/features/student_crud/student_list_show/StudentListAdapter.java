@@ -54,13 +54,13 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentViewHolder> 
         holder.editImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StudentUpdateDialogFragment studentCreateDialogFragment = StudentUpdateDialogFragment.newInstance(student, "Update Student", new StudentCrudListener() {
+                StudentUpdateDialogFragment dialogFragment = StudentUpdateDialogFragment.newInstance(student, "Update Student", new StudentCrudListener() {
                     @Override
                     public void onStudentListUpdate(boolean inUpdated) {
                         listener.onStudentListUpdate(inUpdated);
                     }
                 });
-                studentCreateDialogFragment.show(((StudentListActivity) context).getSupportFragmentManager(), Constants.CREATE_STUDENT);
+                dialogFragment.show(((StudentListActivity) context).getSupportFragmentManager(), UPDATE_STUDENT);
             }
         });
 

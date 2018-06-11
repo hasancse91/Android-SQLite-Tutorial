@@ -80,12 +80,44 @@ public class SubjectQueryImplementation implements QueryContract.SubjectQuery {
 
     @Override
     public void updateSubject(Subject subject, QueryResponse<Boolean> response) {
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 
+        ContentValues contentValues = getContentValuesFromSubject(subject);
+
+        try {
+            long rowCount = sqLiteDatabase.update(TABLE_SUBJECT, contentValues,
+                    SUBJECT_ID + " =? ", new String[]{String.valueOf(subject.getId())});
+
+            if(rowCount>0)
+                response.onSuccess(true);
+            else
+                response.onFailure("No subject is updated at all");
+
+        } catch (Exception e){
+            response.onFailure(e.getMessage());
+        } finally {
+            sqLiteDatabase.close();
+        }
     }
 
     @Override
     public void deleteSubject(int subjectId, QueryResponse<Boolean> response) {
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 
+        try {
+            long rowCount = sqLiteDatabase.delete(TABLE_SUBJECT,
+                    SUBJECT_ID + " =? ", new String[]{String.valueOf(subjectId)});
+
+            if(rowCount>0)
+                response.onSuccess(true);
+            else
+                response.onFailure("No subject is deleted at all");
+
+        } catch (Exception e){
+            response.onFailure(e.getMessage());
+        } finally {
+            sqLiteDatabase.close();
+        }
     }
 
     private Subject getSubjectFromCursor(Cursor cursor) {
@@ -95,5 +127,15 @@ public class SubjectQueryImplementation implements QueryContract.SubjectQuery {
         double subjectCredit = cursor.getDouble(cursor.getColumnIndex(SUBJECT_CREDIT));
 
         return new Subject(id, subjectName, subjectCode, subjectCredit);
+    }
+
+    private ContentValues getContentValuesFromSubject(Subject subject) {
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(SUBJECT_NAME, subject.getName());
+        contentValues.put(SUBJECT_CODE, subject.getCode());
+        contentValues.put(SUBJECT_CREDIT, subject.getCredit());
+
+        return contentValues;
     }
 }
