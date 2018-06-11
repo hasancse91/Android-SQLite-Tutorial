@@ -14,7 +14,8 @@ import android.widget.TextView;
 
 import com.hellohasan.sqlite_multiple_three_tables_crud.R;
 import com.hellohasan.sqlite_multiple_three_tables_crud.database.*;
-import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_create.*;
+import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_create.StudentCreateDialogFragment;
+import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_create.StudentCrudListener;
 import com.hellohasan.sqlite_multiple_three_tables_crud.features.subject_crud.subject_list_show.SubjectListActivity;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.TableRowCount;
@@ -26,6 +27,7 @@ import java.util.List;
 public class StudentListActivity extends AppCompatActivity implements StudentCrudListener {
 
     private RecyclerView recyclerView;
+    private TextView noDataFoundTextView;
     private FloatingActionButton fab;
     private TextView studentCountTextView;
     private TextView subjectCountTextView;
@@ -43,7 +45,7 @@ public class StudentListActivity extends AppCompatActivity implements StudentCru
         setSupportActionBar(toolbar);
         initialization();
 
-        adapter = new StudentListAdapter(this, studentList);
+        adapter = new StudentListAdapter(this, studentList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
@@ -93,6 +95,9 @@ public class StudentListActivity extends AppCompatActivity implements StudentCru
         query.readAllStudent(new QueryResponse<List<Student>>() {
             @Override
             public void onSuccess(List<Student> data) {
+                recyclerView.setVisibility(View.VISIBLE);
+                noDataFoundTextView.setVisibility(View.GONE);
+
                 studentList.clear();
                 studentList.addAll(data);
                 adapter.notifyDataSetChanged();
@@ -100,7 +105,8 @@ public class StudentListActivity extends AppCompatActivity implements StudentCru
 
             @Override
             public void onFailure(String message) {
-
+                recyclerView.setVisibility(View.GONE);
+                noDataFoundTextView.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -126,6 +132,7 @@ public class StudentListActivity extends AppCompatActivity implements StudentCru
 
     private void initialization(){
         recyclerView = findViewById(R.id.recyclerView);
+        noDataFoundTextView = findViewById(R.id.noDataFoundTextView);
         fab = findViewById(R.id.fab);
 
         studentCountTextView = findViewById(R.id.studentCount);

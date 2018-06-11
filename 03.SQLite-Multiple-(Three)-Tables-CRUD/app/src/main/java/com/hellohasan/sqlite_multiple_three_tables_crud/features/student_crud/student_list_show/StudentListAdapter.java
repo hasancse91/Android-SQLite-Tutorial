@@ -1,14 +1,21 @@
 package com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_list_show;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.hellohasan.sqlite_multiple_three_tables_crud.R;
+import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryContract;
+import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryResponse;
+import com.hellohasan.sqlite_multiple_three_tables_crud.database.StudentQueryImplementation;
+import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.student_create.StudentCrudListener;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
 
 import java.util.List;
@@ -19,10 +26,12 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentViewHolder> 
 
     private Context context;
     private List<Student> studentList;
+    private StudentCrudListener listener;
 
-    StudentListAdapter(Context context, List<Student> studentList) {
+    StudentListAdapter(Context context, List<Student> studentList, StudentCrudListener listener) {
         this.context = context;
         this.studentList = studentList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -51,7 +60,7 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentViewHolder> 
         holder.deleteImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showConfirmationDialog(student.getId());
             }
         });
 
@@ -68,5 +77,41 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentViewHolder> 
     @Override
     public int getItemCount() {
         return studentList.size();
+    }
+
+    private void showConfirmationDialog(final int studentId) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        alertDialogBuilder.setMessage("Are you sure, You wanted to delete this student?");
+        alertDialogBuilder.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        QueryContract.StudentQuery query = new StudentQueryImplementation();
+                        query.deleteStudent(studentId, new QueryResponse<Boolean>() {
+                            @Override
+                            public void onSuccess(Boolean data) {
+                                if(data) {
+                                    Toast.makeText(context, "Student deleted successfully", Toast.LENGTH_SHORT).show();
+                                    listener.onStudentListUpdate(true);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(String message) {
+                                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 }

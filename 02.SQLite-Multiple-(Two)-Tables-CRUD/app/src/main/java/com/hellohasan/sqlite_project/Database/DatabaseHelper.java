@@ -24,9 +24,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Logger.addLogAdapter(new AndroidLogAdapter());
     }
 
-    public static synchronized DatabaseHelper getInstance(Context context){
+    public static DatabaseHelper getInstance(Context context) {
         if(databaseHelper==null){
-            databaseHelper = new DatabaseHelper(context);
+            synchronized (DatabaseHelper.class) {
+                if(databaseHelper==null)
+                    databaseHelper = new DatabaseHelper(context);
+            }
         }
         return databaseHelper;
     }
