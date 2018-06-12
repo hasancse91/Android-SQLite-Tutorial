@@ -26,11 +26,11 @@ public class QueryContract {
     }
 
     public interface TakenSubjectQuery {
-        void createTakenSubject(TakenSubject takenSubject, QueryResponse<Integer> response);
+        void createTakenSubject(int studentId, int subjectId, QueryResponse<Boolean> response);
         void readTakenSubject(int takenSubjectId, QueryResponse<TakenSubject> response);
         void readAllTakenSubjectByStudentId(int studentId, QueryResponse<List<Subject>> response);
         void updateTakenSubject(TakenSubject takenSubject, QueryResponse<Boolean> response);
-        void deleteTakenSubject(int takenSubjectId, QueryResponse<Boolean> response);
+        void deleteTakenSubject(int studentId, int subjectId, QueryResponse<Boolean> response);
     }
 
     public interface TableRowCountQuery {

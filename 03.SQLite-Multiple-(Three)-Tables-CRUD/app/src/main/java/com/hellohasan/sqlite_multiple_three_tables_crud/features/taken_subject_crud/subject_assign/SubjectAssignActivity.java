@@ -39,7 +39,7 @@ public class SubjectAssignActivity extends AppCompatActivity {
 
         studentId = getIntent().getIntExtra(STUDENT_ID, -1);
 
-        adapter = new SubjectAssignListAdapter(this, subjectList);
+        adapter = new SubjectAssignListAdapter(this, studentId, subjectList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
