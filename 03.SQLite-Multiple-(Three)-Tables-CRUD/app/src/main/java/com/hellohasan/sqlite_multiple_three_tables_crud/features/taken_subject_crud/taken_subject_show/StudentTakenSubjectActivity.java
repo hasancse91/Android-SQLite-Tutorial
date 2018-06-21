@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,7 +16,6 @@ import com.hellohasan.sqlite_multiple_three_tables_crud.features.taken_subject_c
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.Subject;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.TableRowCount;
-import com.hellohasan.sqlite_multiple_three_tables_crud.model.TakenSubject;
 
 import java.util.ArrayList;
 import java.util.List;

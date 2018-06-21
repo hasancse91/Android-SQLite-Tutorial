@@ -78,7 +78,7 @@ public class TakenSubjectQueryImplementation implements QueryContract.TakenSubje
 
         try {
             long rowCount = sqLiteDatabase.delete(TABLE_TAKEN_SUBJECT,
-                    STUDENT_ID_FK + " =?" + SUBJECT_ID_FK + " =?",
+                    STUDENT_ID_FK + " =? AND " + SUBJECT_ID_FK + " =? ",
                     new String[]{String.valueOf(studentId), String.valueOf(subjectId)});
 
             if (rowCount>0)
