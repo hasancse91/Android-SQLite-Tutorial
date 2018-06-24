@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.hellohasan.sqlite_multiple_three_tables_crud.R;
 import com.hellohasan.sqlite_multiple_three_tables_crud.database.*;
+import com.hellohasan.sqlite_multiple_three_tables_crud.features.taken_subject_crud.TakenSubjectCrudListener;
 import com.hellohasan.sqlite_multiple_three_tables_crud.features.taken_subject_crud.subject_assign.SubjectAssignActivity;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.Subject;
@@ -22,7 +23,7 @@ import java.util.List;
 
 import static com.hellohasan.sqlite_multiple_three_tables_crud.util.Constants.*;
 
-public class StudentTakenSubjectActivity extends AppCompatActivity {
+public class StudentTakenSubjectActivity extends AppCompatActivity implements TakenSubjectCrudListener {
 
     private TextView nameTextView;
     private TextView registrationNumTextView;
@@ -50,7 +51,7 @@ public class StudentTakenSubjectActivity extends AppCompatActivity {
 
         studentId = getIntent().getIntExtra(STUDENT_ID, -1);
 
-        adapter = new TakenSubjectListAdapter(this, takenSubjectList);
+        adapter = new TakenSubjectListAdapter(this, studentId, takenSubjectList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
@@ -77,6 +78,11 @@ public class StudentTakenSubjectActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         finish();
         return true;
+    }
+
+    @Override
+    public void onTakenSubjectUpdated(boolean isUpdated) {
+        showTableRowCount();
     }
 
     private void showStudentInfo() {

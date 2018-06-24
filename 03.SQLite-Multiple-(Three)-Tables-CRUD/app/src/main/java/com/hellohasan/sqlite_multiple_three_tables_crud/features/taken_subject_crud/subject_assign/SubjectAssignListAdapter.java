@@ -37,7 +37,7 @@ public class SubjectAssignListAdapter extends RecyclerView.Adapter<SubjectAssign
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SubjectAssignViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SubjectAssignViewHolder holder,  int position) {
         final Subject subject = subjectList.get(position);
 
         holder.subjectNameTextView.setText(subject.getName());

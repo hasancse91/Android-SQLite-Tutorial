@@ -7,8 +7,6 @@ import android.database.sqlite.SQLiteException;
 
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.Subject;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.TakenSubject;
-import com.orhanobut.logger.AndroidLogAdapter;
-import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
