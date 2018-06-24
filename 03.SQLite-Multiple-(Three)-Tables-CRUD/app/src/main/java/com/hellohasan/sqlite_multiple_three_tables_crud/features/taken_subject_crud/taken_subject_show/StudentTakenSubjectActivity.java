@@ -114,6 +114,7 @@ public class StudentTakenSubjectActivity extends AppCompatActivity {
             public void onFailure(String message) {
                 recyclerView.setVisibility(View.GONE);
                 noDataFoundTextView.setVisibility(View.VISIBLE);
+                noDataFoundTextView.setText(message);
             }
         });
 
