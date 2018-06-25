@@ -1,31 +1,19 @@
 package com.hellohasan.sqlite_multiple_three_tables_crud.model;
 
-public class TakenSubject {
-    private int takenSubjectId;
-    private int studentId;
-    private int subjectId;
+public class TakenSubject extends Subject{
 
-    public int getTakenSubjectId() {
-        return takenSubjectId;
+    private boolean isTaken;
+
+    public TakenSubject(int id, String name, int code, double credit, boolean isTaken) {
+        super(id, name, code, credit);
+        this.isTaken = isTaken;
     }
 
-    public void setTakenSubjectId(int takenSubjectId) {
-        this.takenSubjectId = takenSubjectId;
+    public boolean isTaken() {
+        return isTaken;
     }
 
-    public int getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
-    }
-
-    public int getSubjectId() {
-        return subjectId;
-    }
-
-    public void setSubjectId(int subjectId) {
-        this.subjectId = subjectId;
+    public void setTaken(boolean taken) {
+        isTaken = taken;
     }
 }

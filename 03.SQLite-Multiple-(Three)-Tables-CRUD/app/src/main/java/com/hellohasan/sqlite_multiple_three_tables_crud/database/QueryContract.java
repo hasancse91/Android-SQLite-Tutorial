@@ -29,6 +29,7 @@ public class QueryContract {
         void createTakenSubject(int studentId, int subjectId, QueryResponse<Boolean> response);
         void readTakenSubject(int takenSubjectId, QueryResponse<TakenSubject> response);
         void readAllTakenSubjectByStudentId(int studentId, QueryResponse<List<Subject>> response);
+        void readAllSubjectWithTakenStatus(int studentId, QueryResponse<List<TakenSubject>> response);
         void updateTakenSubject(TakenSubject takenSubject, QueryResponse<Boolean> response);
         void deleteTakenSubject(int studentId, int subjectId, QueryResponse<Boolean> response);
     }

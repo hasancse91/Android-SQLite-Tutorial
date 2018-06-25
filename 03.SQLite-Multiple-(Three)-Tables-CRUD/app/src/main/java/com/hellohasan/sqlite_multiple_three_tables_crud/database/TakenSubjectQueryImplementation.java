@@ -26,7 +26,7 @@ public class TakenSubjectQueryImplementation implements QueryContract.TakenSubje
         contentValues.put(SUBJECT_ID_FK, subjectId);
 
         try {
-            long rowCount = sqLiteDatabase.insertOrThrow(TABLE_TAKEN_SUBJECT, null, contentValues);
+            long rowCount = sqLiteDatabase.insertOrThrow(TABLE_STUDENT_SUBJECT, null, contentValues);
 
             if (rowCount>0)
                 response.onSuccess(true);
@@ -49,7 +49,7 @@ public class TakenSubjectQueryImplementation implements QueryContract.TakenSubje
     public void readAllTakenSubjectByStudentId(int studentId, QueryResponse<List<Subject>> response) {
         SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 
-        String QUERY = "SELECT subject._id, name, subject_code, credit FROM subject JOIN taken_subject ON subject._id = taken_subject.fk_subject_id WHERE taken_subject.fk_student_id = " + studentId;
+        String QUERY = "SELECT s._id, s.name, s.subject_code, s.credit FROM subject as s JOIN student_subject as ss ON s._id = ss.fk_subject_id WHERE ss.fk_student_id = " + studentId;
         Cursor cursor = null;
         try {
             List<Subject> subjectList = new ArrayList<>();
@@ -62,12 +62,59 @@ public class TakenSubjectQueryImplementation implements QueryContract.TakenSubje
                     int subjectCode = cursor.getInt(cursor.getColumnIndex(SUBJECT_CODE));
                     double subjectCredit = cursor.getDouble(cursor.getColumnIndex(SUBJECT_CREDIT));
 
+
                     Subject subject = new Subject(id, subjectName, subjectCode, subjectCredit);
                     subjectList.add(subject);
+
 
                 } while (cursor.moveToNext());
 
                 response.onSuccess(subjectList);
+            } else
+                response.onFailure("There are no subject assigned to this student");
+
+        } catch (Exception e){
+            response.onFailure(e.getMessage());
+        } finally {
+            sqLiteDatabase.close();
+            if (cursor!=null)
+                cursor.close();
+        }
+    }
+
+    @Override
+    public void readAllSubjectWithTakenStatus(int studentId, QueryResponse<List<TakenSubject>> response) {
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
+
+        String QUERY = "SELECT s._id, s.name, s.subject_code, s.credit, ss.fk_student_id, ss.fk_subject_id  " +
+                "FROM subject as s INNER JOIN student_subject as ss WHERE ss.fk_student_id = " + studentId;
+//        String QUERY = "SELECT s._id, s.name, s.subject_code, s.credit, ss.fk_student_id, ss.fk_subject_id  " +
+//                "FROM subject as s LEFT JOIN student_subject as ss";
+        Cursor cursor = null;
+        try {
+            List<TakenSubject> takenSubjectList = new ArrayList<>();
+            cursor = sqLiteDatabase.rawQuery(QUERY, null);
+
+            if(cursor.moveToFirst()){
+                do {
+                    int id = cursor.getInt(cursor.getColumnIndex(SUBJECT_ID));
+                    String subjectName = cursor.getString(cursor.getColumnIndex(SUBJECT_NAME));
+                    int subjectCode = cursor.getInt(cursor.getColumnIndex(SUBJECT_CODE));
+                    double subjectCredit = cursor.getDouble(cursor.getColumnIndex(SUBJECT_CREDIT));
+
+                    boolean isTaken = false;
+
+                    if(cursor.getInt(cursor.getColumnIndex(STUDENT_ID_FK)) > 0
+                            && cursor.getInt(cursor.getColumnIndex(SUBJECT_ID_FK)) > 0) {
+                        isTaken = true;
+                    }
+
+                    TakenSubject takenSubject = new TakenSubject(id, subjectName, subjectCode, subjectCredit, isTaken);
+                    takenSubjectList.add(takenSubject);
+
+                } while (cursor.moveToNext());
+
+                response.onSuccess(takenSubjectList);
             } else
                 response.onFailure("There are no subject assigned to this student");
 
@@ -90,7 +137,7 @@ public class TakenSubjectQueryImplementation implements QueryContract.TakenSubje
         SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 
         try {
-            long rowCount = sqLiteDatabase.delete(TABLE_TAKEN_SUBJECT,
+            long rowCount = sqLiteDatabase.delete(TABLE_STUDENT_SUBJECT,
                     STUDENT_ID_FK + " =? AND " + SUBJECT_ID_FK + " =? ",
                     new String[]{String.valueOf(studentId), String.valueOf(subjectId)});
 

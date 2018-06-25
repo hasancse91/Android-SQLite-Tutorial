@@ -48,8 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + SUBJECT_CREDIT + " REAL" //nullable
                 + ")";
 
-        String CREATE_TAKEN_SUBJECT_TABLE = "CREATE TABLE " + TABLE_TAKEN_SUBJECT + "("
-                + TAKEN_SUBJECT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+        String CREATE_TAKEN_SUBJECT_TABLE = "CREATE TABLE " + TABLE_STUDENT_SUBJECT + "("
                 + STUDENT_ID_FK + " INTEGER NOT NULL, "
                 + SUBJECT_ID_FK + " INTEGER NOT NULL, "
                 + "FOREIGN KEY (" + STUDENT_ID_FK + ") REFERENCES " + TABLE_STUDENT + "(" + STUDENT_ID + ") ON UPDATE CASCADE ON DELETE CASCADE, "
@@ -68,7 +67,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Drop older table if existed
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENT);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_SUBJECT);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_TAKEN_SUBJECT);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENT_SUBJECT);
 
         // Create tables again
         onCreate(sqLiteDatabase);

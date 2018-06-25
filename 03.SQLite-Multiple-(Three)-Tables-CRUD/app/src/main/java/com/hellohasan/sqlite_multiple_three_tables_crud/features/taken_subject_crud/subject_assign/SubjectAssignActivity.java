@@ -12,6 +12,7 @@ import com.hellohasan.sqlite_multiple_three_tables_crud.R;
 import com.hellohasan.sqlite_multiple_three_tables_crud.database.*;
 import com.hellohasan.sqlite_multiple_three_tables_crud.database.SubjectQueryImplementation;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.Subject;
+import com.hellohasan.sqlite_multiple_three_tables_crud.model.TakenSubject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,8 @@ public class SubjectAssignActivity extends AppCompatActivity {
 
     private int studentId;
 
-    private List<Subject> subjectList = new ArrayList<>();
+//    private List<Subject> subjectList = new ArrayList<>();
+    private List<TakenSubject> takenSubjectList = new ArrayList<>();
     private SubjectAssignListAdapter adapter;
 
     @Override
@@ -39,19 +41,19 @@ public class SubjectAssignActivity extends AppCompatActivity {
 
         studentId = getIntent().getIntExtra(STUDENT_ID, -1);
 
-        adapter = new SubjectAssignListAdapter(this, studentId, subjectList);
+        adapter = new SubjectAssignListAdapter(this, studentId, takenSubjectList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
-        QueryContract.SubjectQuery query = new SubjectQueryImplementation();
-        query.readAllSubject(new QueryResponse<List<Subject>>() {
+        QueryContract.TakenSubjectQuery query = new TakenSubjectQueryImplementation();
+        query.readAllSubjectWithTakenStatus(studentId, new QueryResponse<List<TakenSubject>>() {
             @Override
-            public void onSuccess(List<Subject> data) {
+            public void onSuccess(List<TakenSubject> data) {
                 recyclerView.setVisibility(View.VISIBLE);
                 noDataFoundTextView.setVisibility(View.GONE);
 
-                subjectList.clear();
-                subjectList.addAll(data);
+                takenSubjectList.clear();
+                takenSubjectList.addAll(data);
                 adapter.notifyDataSetChanged();
             }
 
@@ -61,6 +63,25 @@ public class SubjectAssignActivity extends AppCompatActivity {
                 noDataFoundTextView.setVisibility(View.VISIBLE);
             }
         });
+
+//        QueryContract.SubjectQuery query = new SubjectQueryImplementation();
+//        query.readAllSubject(new QueryResponse<List<Subject>>() {
+//            @Override
+//            public void onSuccess(List<Subject> data) {
+//                recyclerView.setVisibility(View.VISIBLE);
+//                noDataFoundTextView.setVisibility(View.GONE);
+//
+//                subjectList.clear();
+//                subjectList.addAll(data);
+//                adapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onFailure(String message) {
+//                recyclerView.setVisibility(View.GONE);
+//                noDataFoundTextView.setVisibility(View.VISIBLE);
+//            }
+//        });
 
     }
 

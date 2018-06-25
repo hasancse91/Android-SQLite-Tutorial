@@ -17,7 +17,7 @@ public class TableRowCountQueryImplementation implements QueryContract.TableRowC
         try {
             long studentCount = DatabaseUtils.queryNumEntries(sqLiteDatabase, TABLE_STUDENT);
             long subjectCount = DatabaseUtils.queryNumEntries(sqLiteDatabase, TABLE_SUBJECT);
-            long takenSubjectCount = DatabaseUtils.queryNumEntries(sqLiteDatabase, TABLE_TAKEN_SUBJECT);
+            long takenSubjectCount = DatabaseUtils.queryNumEntries(sqLiteDatabase, TABLE_STUDENT_SUBJECT);
 
             TableRowCount tableRowCount = new TableRowCount(studentCount, subjectCount, takenSubjectCount);
             response.onSuccess(tableRowCount);

@@ -14,6 +14,7 @@ import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryContract;
 import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryResponse;
 import com.hellohasan.sqlite_multiple_three_tables_crud.database.TakenSubjectQueryImplementation;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.Subject;
+import com.hellohasan.sqlite_multiple_three_tables_crud.model.TakenSubject;
 
 import java.util.List;
 
@@ -21,12 +22,12 @@ public class SubjectAssignListAdapter extends RecyclerView.Adapter<SubjectAssign
 
     private Context context;
     private int studentId;
-    private List<Subject> subjectList;
+    private List<TakenSubject> takenSubjectList;
 
-    public SubjectAssignListAdapter(Context context, int studentId, List<Subject> subjectList) {
+    public SubjectAssignListAdapter(Context context, int studentId, List<TakenSubject> takenSubjectList) {
         this.context = context;
         this.studentId = studentId;
-        this.subjectList = subjectList;
+        this.takenSubjectList = takenSubjectList;
     }
 
     @NonNull
@@ -38,11 +39,12 @@ public class SubjectAssignListAdapter extends RecyclerView.Adapter<SubjectAssign
 
     @Override
     public void onBindViewHolder(@NonNull SubjectAssignViewHolder holder,  int position) {
-        final Subject subject = subjectList.get(position);
+        final TakenSubject subject = takenSubjectList.get(position);
 
         holder.subjectNameTextView.setText(subject.getName());
         holder.courseCodeTextView.setText(context.getString(R.string.course_code, subject.getCode()));
         holder.creditTextView.setText(context.getString(R.string.course_credit, subject.getCredit()));
+        holder.checkBox.setChecked(subject.isTaken());
 
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -57,7 +59,7 @@ public class SubjectAssignListAdapter extends RecyclerView.Adapter<SubjectAssign
 
     @Override
     public int getItemCount() {
-        return subjectList.size();
+        return takenSubjectList.size();
     }
 
     private void assignSubject(int subjectId) {

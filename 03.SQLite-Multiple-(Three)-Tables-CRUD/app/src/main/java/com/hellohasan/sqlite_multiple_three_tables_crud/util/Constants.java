@@ -17,9 +17,8 @@ public class Constants {
     public static final String SUBJECT_CODE = "subject_code";
     public static final String SUBJECT_CREDIT = "credit";
 
-    //column names of taken_subject table
-    public static final String TABLE_TAKEN_SUBJECT = "taken_subject";
-    public static final String TAKEN_SUBJECT_ID = "_id";
+    //column names of student_subject pivot table
+    public static final String TABLE_STUDENT_SUBJECT = "student_subject";
     public static final String STUDENT_ID_FK = "fk_student_id";
     public static final String SUBJECT_ID_FK = "fk_subject_id";
     public static final String STUDENT_SUB_CONSTRAINT = "student_sub_unique";
