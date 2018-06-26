@@ -49,7 +49,7 @@ public class TakenSubjectQueryImplementation implements QueryContract.TakenSubje
     public void readAllTakenSubjectByStudentId(int studentId, QueryResponse<List<Subject>> response) {
         SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 
-        String QUERY = "SELECT s._id, s.name, s.subject_code, s.credit FROM subject as s JOIN student_subject as ss ON s._id = ss.fk_subject_id WHERE ss.fk_student_id = " + studentId;
+        String QUERY = "SELECT s._id, s.name, s.code, s.credit FROM subject as s JOIN student_subject as ss ON s._id = ss.subject_id WHERE ss.student_id = " + studentId;
         Cursor cursor = null;
         try {
             List<Subject> subjectList = new ArrayList<>();
@@ -86,10 +86,10 @@ public class TakenSubjectQueryImplementation implements QueryContract.TakenSubje
     public void readAllSubjectWithTakenStatus(int studentId, QueryResponse<List<TakenSubject>> response) {
         SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 
-        String QUERY = "SELECT s._id, s.name, s.subject_code, s.credit, ss.fk_student_id, ss.fk_subject_id  " +
-                "FROM subject as s INNER JOIN student_subject as ss WHERE ss.fk_student_id = " + studentId;
-//        String QUERY = "SELECT s._id, s.name, s.subject_code, s.credit, ss.fk_student_id, ss.fk_subject_id  " +
-//                "FROM subject as s LEFT JOIN student_subject as ss";
+        String QUERY = "SELECT s._id, s.name, s.code, s.credit, ss.student_id, ss.subject_id  " +
+                "FROM subject as s LEFT JOIN student_subject as ss WHERE s._id = ss.subject_id " +
+                "AND WHERE ss.student_id = " + studentId;
+
         Cursor cursor = null;
         try {
             List<TakenSubject> takenSubjectList = new ArrayList<>();

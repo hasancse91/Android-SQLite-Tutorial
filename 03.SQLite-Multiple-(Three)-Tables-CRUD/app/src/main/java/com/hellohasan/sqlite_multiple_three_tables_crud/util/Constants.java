@@ -14,13 +14,13 @@ public class Constants {
     public static final String TABLE_SUBJECT = "subject";
     public static final String SUBJECT_ID = "_id";
     public static final String SUBJECT_NAME = "name";
-    public static final String SUBJECT_CODE = "subject_code";
+    public static final String SUBJECT_CODE = "code";
     public static final String SUBJECT_CREDIT = "credit";
 
     //column names of student_subject pivot table
     public static final String TABLE_STUDENT_SUBJECT = "student_subject";
-    public static final String STUDENT_ID_FK = "fk_student_id";
-    public static final String SUBJECT_ID_FK = "fk_subject_id";
+    public static final String STUDENT_ID_FK = "student_id";
+    public static final String SUBJECT_ID_FK = "subject_id";
     public static final String STUDENT_SUB_CONSTRAINT = "student_sub_unique";
 
 
