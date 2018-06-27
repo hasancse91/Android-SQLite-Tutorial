@@ -45,11 +45,6 @@ public class SubjectQueryImplementation implements QueryContract.SubjectQuery {
     }
 
     @Override
-    public void readSubject(int subjectId, QueryResponse<Subject> response) {
-
-    }
-
-    @Override
     public void readAllSubject(QueryResponse<List<Subject>> response) {
         SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 

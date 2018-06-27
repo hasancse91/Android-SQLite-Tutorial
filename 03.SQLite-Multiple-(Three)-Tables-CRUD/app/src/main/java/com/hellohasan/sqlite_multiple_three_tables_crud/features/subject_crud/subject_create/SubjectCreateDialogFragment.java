@@ -12,9 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.hellohasan.sqlite_multiple_three_tables_crud.R;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryContract;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryResponse;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.SubjectQueryImplementation;
+import com.hellohasan.sqlite_multiple_three_tables_crud.database.*;
 import com.hellohasan.sqlite_multiple_three_tables_crud.features.subject_crud.SubjectCrudListener;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.Subject;
 import com.hellohasan.sqlite_multiple_three_tables_crud.util.Constants;

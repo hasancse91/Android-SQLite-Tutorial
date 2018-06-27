@@ -124,5 +124,4 @@ public class StudentUpdateDialogFragment extends DialogFragment {
             dialog.getWindow().setLayout(width, height);
         }
     }
-
 }

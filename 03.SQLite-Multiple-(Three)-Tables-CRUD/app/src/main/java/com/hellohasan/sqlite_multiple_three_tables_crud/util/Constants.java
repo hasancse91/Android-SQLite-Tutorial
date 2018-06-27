@@ -23,12 +23,10 @@ public class Constants {
     public static final String SUBJECT_ID_FK = "subject_id";
     public static final String STUDENT_SUB_CONSTRAINT = "student_sub_unique";
 
-
     //others for general purpose key-value pair data
     public static final String TITLE = "title";
     public static final String CREATE_STUDENT = "create_student";
     public static final String UPDATE_STUDENT = "update_student";
     public static final String CREATE_SUBJECT = "create_subject";
     public static final String UPDATE_SUBJECT = "update_subject";
-    public static final String STUDENT_REGISTRATION = "student_registration";
 }

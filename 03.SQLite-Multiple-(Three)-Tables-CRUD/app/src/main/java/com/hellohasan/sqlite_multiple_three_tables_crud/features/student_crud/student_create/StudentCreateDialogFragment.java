@@ -11,9 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.hellohasan.sqlite_multiple_three_tables_crud.R;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryContract;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryResponse;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.StudentQueryImplementation;
+import com.hellohasan.sqlite_multiple_three_tables_crud.database.*;
 import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.StudentCrudListener;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
 

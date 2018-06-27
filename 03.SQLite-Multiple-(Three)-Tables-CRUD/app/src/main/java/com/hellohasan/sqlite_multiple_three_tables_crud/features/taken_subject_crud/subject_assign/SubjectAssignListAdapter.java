@@ -10,10 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.hellohasan.sqlite_multiple_three_tables_crud.R;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryContract;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryResponse;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.TakenSubjectQueryImplementation;
-import com.hellohasan.sqlite_multiple_three_tables_crud.model.Subject;
+import com.hellohasan.sqlite_multiple_three_tables_crud.database.*;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.TakenSubject;
 
 import java.util.List;
@@ -67,7 +64,8 @@ public class SubjectAssignListAdapter extends RecyclerView.Adapter<SubjectAssign
         query.createTakenSubject(studentId, subjectId, new QueryResponse<Boolean>() {
             @Override
             public void onSuccess(Boolean data) {
-
+                // We did nothing here. because we don't need to update (set checked) CheckBox manually
+                // CheckBox is updated by default after clicking on it
             }
 
             @Override
@@ -82,7 +80,8 @@ public class SubjectAssignListAdapter extends RecyclerView.Adapter<SubjectAssign
         query.deleteTakenSubject(studentId, subjectId, new QueryResponse<Boolean>() {
             @Override
             public void onSuccess(Boolean data) {
-
+                // We did nothing here. because we don't need to update (set unchecked) CheckBox manually
+                // CheckBox is updated by default after clicking on it
             }
 
             @Override

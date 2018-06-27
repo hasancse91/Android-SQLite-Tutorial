@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import com.hellohasan.sqlite_multiple_three_tables_crud.R;
 import com.hellohasan.sqlite_multiple_three_tables_crud.database.*;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.SubjectQueryImplementation;
-import com.hellohasan.sqlite_multiple_three_tables_crud.model.Subject;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.TakenSubject;
 
 import java.util.ArrayList;
@@ -24,9 +22,6 @@ public class SubjectAssignActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private TextView noDataFoundTextView;
 
-    private int studentId;
-
-//    private List<Subject> subjectList = new ArrayList<>();
     private List<TakenSubject> takenSubjectList = new ArrayList<>();
     private SubjectAssignListAdapter adapter;
 
@@ -39,7 +34,7 @@ public class SubjectAssignActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         noDataFoundTextView = findViewById(R.id.noDataFoundTextView);
 
-        studentId = getIntent().getIntExtra(STUDENT_ID, -1);
+        int studentId = getIntent().getIntExtra(STUDENT_ID, -1);
 
         adapter = new SubjectAssignListAdapter(this, studentId, takenSubjectList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -63,25 +58,6 @@ public class SubjectAssignActivity extends AppCompatActivity {
                 noDataFoundTextView.setVisibility(View.VISIBLE);
             }
         });
-
-//        QueryContract.SubjectQuery query = new SubjectQueryImplementation();
-//        query.readAllSubject(new QueryResponse<List<Subject>>() {
-//            @Override
-//            public void onSuccess(List<Subject> data) {
-//                recyclerView.setVisibility(View.VISIBLE);
-//                noDataFoundTextView.setVisibility(View.GONE);
-//
-//                subjectList.clear();
-//                subjectList.addAll(data);
-//                adapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onFailure(String message) {
-//                recyclerView.setVisibility(View.GONE);
-//                noDataFoundTextView.setVisibility(View.VISIBLE);
-//            }
-//        });
 
     }
 

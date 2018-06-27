@@ -18,7 +18,6 @@ class StudentViewHolder extends RecyclerView.ViewHolder {
 
     StudentViewHolder(View itemView) {
         super(itemView);
-
         nameTextView = itemView.findViewById(R.id.nameTextView);
         registrationNumTextView = itemView.findViewById(R.id.registrationNumTextView);
         emailTextView = itemView.findViewById(R.id.emailTextView);

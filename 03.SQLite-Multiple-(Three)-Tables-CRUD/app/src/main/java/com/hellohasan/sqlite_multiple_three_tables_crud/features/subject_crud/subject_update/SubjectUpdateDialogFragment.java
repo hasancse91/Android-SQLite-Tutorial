@@ -11,13 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.hellohasan.sqlite_multiple_three_tables_crud.R;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryContract;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.QueryResponse;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.StudentQueryImplementation;
-import com.hellohasan.sqlite_multiple_three_tables_crud.database.SubjectQueryImplementation;
-import com.hellohasan.sqlite_multiple_three_tables_crud.features.student_crud.StudentCrudListener;
+import com.hellohasan.sqlite_multiple_three_tables_crud.database.*;
 import com.hellohasan.sqlite_multiple_three_tables_crud.features.subject_crud.SubjectCrudListener;
-import com.hellohasan.sqlite_multiple_three_tables_crud.model.Student;
 import com.hellohasan.sqlite_multiple_three_tables_crud.model.Subject;
 
 import static com.hellohasan.sqlite_multiple_three_tables_crud.util.Constants.TITLE;
@@ -119,5 +114,4 @@ public class SubjectUpdateDialogFragment extends DialogFragment {
             dialog.getWindow().setLayout(width, height);
         }
     }
-
 }

@@ -16,7 +16,6 @@ public class SubjectAssignViewHolder extends RecyclerView.ViewHolder {
 
     public SubjectAssignViewHolder(View itemView) {
         super(itemView);
-
         checkBox = itemView.findViewById(R.id.checkbox);
         subjectNameTextView = itemView.findViewById(R.id.subjectNameTextView);
         courseCodeTextView = itemView.findViewById(R.id.courseCodeTextView);

@@ -41,15 +41,10 @@ public class TakenSubjectQueryImplementation implements QueryContract.TakenSubje
     }
 
     @Override
-    public void readTakenSubject(int takenSubjectId, QueryResponse<TakenSubject> response) {
-
-    }
-
-    @Override
     public void readAllTakenSubjectByStudentId(int studentId, QueryResponse<List<Subject>> response) {
         SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 
-        String QUERY = "SELECT s._id, s.name, s.code, s.credit FROM subject as s JOIN student_subject as ss ON s._id = ss.subject_id WHERE ss.student_id = " + studentId;
+        String QUERY = "SELECT * FROM subject as s JOIN student_subject as ss ON s._id = ss.subject_id WHERE ss.student_id = " + studentId;
         Cursor cursor = null;
         try {
             List<Subject> subjectList = new ArrayList<>();
@@ -62,10 +57,8 @@ public class TakenSubjectQueryImplementation implements QueryContract.TakenSubje
                     int subjectCode = cursor.getInt(cursor.getColumnIndex(SUBJECT_CODE));
                     double subjectCredit = cursor.getDouble(cursor.getColumnIndex(SUBJECT_CREDIT));
 
-
                     Subject subject = new Subject(id, subjectName, subjectCode, subjectCredit);
                     subjectList.add(subject);
-
 
                 } while (cursor.moveToNext());
 
@@ -87,8 +80,8 @@ public class TakenSubjectQueryImplementation implements QueryContract.TakenSubje
         SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 
         String QUERY = "SELECT s._id, s.name, s.code, s.credit, ss.student_id, ss.subject_id  " +
-                "FROM subject as s LEFT JOIN student_subject as ss WHERE s._id = ss.subject_id " +
-                "AND WHERE ss.student_id = " + studentId;
+                "FROM subject as s LEFT JOIN student_subject as ss ON s._id = ss.subject_id " +
+                "AND ss.student_id = " + studentId;
 
         Cursor cursor = null;
         try {
@@ -125,11 +118,6 @@ public class TakenSubjectQueryImplementation implements QueryContract.TakenSubje
             if (cursor!=null)
                 cursor.close();
         }
-    }
-
-    @Override
-    public void updateTakenSubject(TakenSubject takenSubject, QueryResponse<Boolean> response) {
-
     }
 
     @Override

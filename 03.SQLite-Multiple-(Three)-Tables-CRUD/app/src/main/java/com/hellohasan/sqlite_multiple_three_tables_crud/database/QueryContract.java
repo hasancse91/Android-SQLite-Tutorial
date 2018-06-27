@@ -19,7 +19,6 @@ public class QueryContract {
 
     public interface SubjectQuery {
         void createSubject(Subject subject, QueryResponse<Boolean> response);
-        void readSubject(int subjectId, QueryResponse<Subject> response);
         void readAllSubject(QueryResponse<List<Subject>> response);
         void updateSubject(Subject subject, QueryResponse<Boolean> response);
         void deleteSubject(int subjectId, QueryResponse<Boolean> response);
@@ -27,10 +26,8 @@ public class QueryContract {
 
     public interface TakenSubjectQuery {
         void createTakenSubject(int studentId, int subjectId, QueryResponse<Boolean> response);
-        void readTakenSubject(int takenSubjectId, QueryResponse<TakenSubject> response);
         void readAllTakenSubjectByStudentId(int studentId, QueryResponse<List<Subject>> response);
         void readAllSubjectWithTakenStatus(int studentId, QueryResponse<List<TakenSubject>> response);
-        void updateTakenSubject(TakenSubject takenSubject, QueryResponse<Boolean> response);
         void deleteTakenSubject(int studentId, int subjectId, QueryResponse<Boolean> response);
     }
 

@@ -36,7 +36,6 @@ public class StudentListActivity extends AppCompatActivity implements StudentCru
     private List<Student> studentList = new ArrayList<>();
     private StudentListAdapter adapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

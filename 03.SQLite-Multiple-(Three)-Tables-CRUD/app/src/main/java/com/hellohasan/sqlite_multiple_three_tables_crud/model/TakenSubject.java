@@ -12,8 +12,4 @@ public class TakenSubject extends Subject{
     public boolean isTaken() {
         return isTaken;
     }
-
-    public void setTaken(boolean taken) {
-        isTaken = taken;
-    }
 }
