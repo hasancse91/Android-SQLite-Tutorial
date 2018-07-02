@@ -79,7 +79,7 @@ public class TakenSubjectQueryImplementation implements QueryContract.TakenSubje
     public void readAllSubjectWithTakenStatus(int studentId, QueryResponse<List<TakenSubject>> response) {
         SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 
-        String QUERY = "SELECT s._id, s.name, s.code, s.credit, ss.student_id, ss.subject_id  " +
+        String QUERY = "SELECT s._id, s.name, s.code, s.credit, ss.student_id " +
                 "FROM subject as s LEFT JOIN student_subject as ss ON s._id = ss.subject_id " +
                 "AND ss.student_id = " + studentId;
 
@@ -97,8 +97,7 @@ public class TakenSubjectQueryImplementation implements QueryContract.TakenSubje
 
                     boolean isTaken = false;
 
-                    if(cursor.getInt(cursor.getColumnIndex(STUDENT_ID_FK)) > 0
-                            && cursor.getInt(cursor.getColumnIndex(SUBJECT_ID_FK)) > 0) {
+                    if(cursor.getInt(cursor.getColumnIndex(STUDENT_ID_FK)) > 0) {
                         isTaken = true;
                     }
 
