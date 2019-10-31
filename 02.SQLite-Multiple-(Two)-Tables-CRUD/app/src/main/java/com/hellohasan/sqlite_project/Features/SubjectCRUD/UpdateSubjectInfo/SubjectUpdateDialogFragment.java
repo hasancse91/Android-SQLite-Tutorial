@@ -3,7 +3,7 @@ package com.hellohasan.sqlite_project.Features.SubjectCRUD.UpdateSubjectInfo;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import androidx.fragment.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +43,7 @@ public class SubjectUpdateDialogFragment extends DialogFragment {
         args.putString("title", "Update subject information");
         subjectUpdateDialogFragment.setArguments(args);
 
-        subjectUpdateDialogFragment.setStyle(android.support.v4.app.DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
+        subjectUpdateDialogFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
 
         return subjectUpdateDialogFragment;
     }
