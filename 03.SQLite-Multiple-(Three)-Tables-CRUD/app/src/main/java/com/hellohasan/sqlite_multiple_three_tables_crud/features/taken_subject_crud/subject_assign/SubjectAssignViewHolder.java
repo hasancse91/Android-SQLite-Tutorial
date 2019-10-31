@@ -1,6 +1,6 @@
 package com.hellohasan.sqlite_multiple_three_tables_crud.features.taken_subject_crud.subject_assign;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;

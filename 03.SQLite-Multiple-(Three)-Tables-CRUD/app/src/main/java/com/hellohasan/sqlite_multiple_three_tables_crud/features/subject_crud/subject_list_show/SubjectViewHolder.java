@@ -1,6 +1,6 @@
 package com.hellohasan.sqlite_multiple_three_tables_crud.features.subject_crud.subject_list_show;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
